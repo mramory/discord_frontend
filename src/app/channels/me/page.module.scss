@@ -1,0 +1,18 @@
+@use "../../../styles/vars" as v;
+
+
+.container{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: v.$black4;
+
+    .title{
+        margin-left: 30px;
+    }
+}
+
+.pageContainer{
+    padding: 15px 20px;
+}

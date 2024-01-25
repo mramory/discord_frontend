@@ -1,0 +1,22 @@
+@use "../../../styles/vars"as v;
+
+
+.container{
+    flex: 1 1 auto;
+    height: 100%;
+    background-color: v.$black4;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.loading{
+    flex: 1 1 auto;
+    height: 100%;
+    background-color: v.$black4;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

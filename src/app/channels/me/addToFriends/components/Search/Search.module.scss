@@ -1,0 +1,15 @@
+@use "../../../../../../styles/vars" as v;
+
+.container{
+    position: relative;
+    margin: 20px 0;
+}
+
+.input{
+    color: v.$light-font-color;
+    font-size: 16px;
+    background-color: v.$black1;
+    width: 100%;
+    padding: 15px 10px;
+    border-radius: 10px;
+}

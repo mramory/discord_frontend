@@ -1,0 +1,23 @@
+@use "../../../../../styles/vars" as v;
+
+.container{
+    display: flex;
+    flex-direction: column;
+
+    label{
+        color: v.$grey-light;
+        margin-bottom: 8px;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 700;
+    }
+
+    span{
+        color: #F23F42;
+    }
+}
+
+.selectors{
+    display: flex;
+    gap: 13px;
+}

@@ -1,0 +1,80 @@
+@use "../../../../../styles/vars" as v;
+
+.container{
+    width: 340px;
+    height: 100%;
+    background-color: #232428;
+}
+
+.wrapper{
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+.infoBox{
+    border-radius: 10px;
+    font-size: 12px;
+    background-color: #111214;
+    margin: 20px 0;
+    padding: 15px 10px;
+
+    .head{
+
+        p{
+            font-size: 18px;
+        }
+
+        p:last-child{
+            font-size: 14px;
+        }
+    }
+
+    .main{
+        padding: 15px 0;
+        margin: 15px 0;
+        border-top: 1px #3F4147 solid;
+        border-bottom: 1px #3F4147 solid;
+
+        .aboutMe{
+            margin-bottom: 10px;
+            p:first-child{
+                margin-bottom: 5px;
+            }
+        }
+
+        .since{
+
+            p:first-child{
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    .bottom{
+
+        p{
+            margin-bottom: 5px;
+        }
+
+        input{
+            padding: 0;
+        }
+    }
+}
+
+.servers{
+    display: flex;
+    cursor: pointer;
+    line-height: 1em;
+
+    .close{
+        font-size: 16px;
+        transition: all 0.2s;
+    }
+
+    .open{
+        font-size: 16px;
+        transition: all 0.2s;
+        transform: rotate(90deg);
+    }
+}

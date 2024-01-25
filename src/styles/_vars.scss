@@ -1,0 +1,23 @@
+$black1: #1E1F22;
+$black2: #282b30;
+$black3: #36393e;
+$black4: #313338;
+$grey-light: #B5BAC1;
+$grey-light2: #9299A2;
+$primary-color: #5865F2;
+$green-color: #23A559;
+$bg-dark: #2B2D31;
+$font-color: #80848E;
+$light-font-color: #B5BAC1;
+ 
+:export {
+    black1: $black1;
+    black2: $black2;
+    black3: $black3;
+    black4: $black4;
+    primary-color: $primary-color;
+    bg-dark: $bg-dark;
+    font-color: $font-color;
+    light-font-color: $light-font-color;
+    green-color: $green-color
+}

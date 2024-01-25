@@ -1,0 +1,31 @@
+@use "../../../../../styles/vars" as v;
+
+
+.container{
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+}
+
+.input{
+    color: #DBDEE1;
+    font-size: 18px;
+    padding: 11px 56px;
+    background-color: #383A40;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.cloudinary{
+    height: 24px;
+    position: absolute;
+    color: #DBDEE1;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    &:hover{
+        color: #fff;
+    }
+}

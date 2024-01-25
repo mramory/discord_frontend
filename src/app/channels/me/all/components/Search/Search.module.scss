@@ -1,0 +1,22 @@
+@use "../../../../../../styles/vars" as v;
+
+.container{
+    position: relative;
+}
+
+.input{
+    color: v.$light-font-color;
+    background-color: v.$black1;
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 5px;
+}
+
+.loop{
+    color: v.$font-color;
+    font-size: 1.2em;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}

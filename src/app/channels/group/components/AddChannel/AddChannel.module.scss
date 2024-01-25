@@ -1,0 +1,80 @@
+@use "../../../../../styles/vars" as v;
+
+.modal {
+  outline: none;
+  width: 460px;
+  background-color: v.$black4;
+  border-radius: 10px;
+}
+
+.container{
+    position: relative;
+    padding: 15px;
+    p {
+        font-size: 10px;
+        font-weight: 600;
+        color: v.$font-color;
+        margin: 15px 0 10px;
+      }
+
+      input{
+        background-color: v.$black1;
+        color: v.$light-font-color;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+      }
+}
+
+.footer{
+    background-color: v.$bg-dark;
+    padding: 15px;
+
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .cancel{
+        font-size: 14px;
+        margin-right: 30px;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
+
+.typeBoxContainer{
+  cursor: pointer;
+  padding: 10px;
+  background-color: #2B2D31;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+  .typeName{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  span{
+    font-size: 12px;
+    color: v.$font-color;
+  }
+
+  &:hover:not(.activeTypeBox){
+    
+    background-color: #393C41;
+  }
+}
+
+.activeTypeBox{
+  background-color: #43444B;
+  
+}

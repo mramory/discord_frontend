@@ -1,0 +1,67 @@
+@use "../../../../../../styles/vars" as v;
+
+.container{
+    width: 660px;
+}
+
+.color{
+    height: 100px;
+    border-radius: 10px 10px 0 0;
+}
+
+.user{
+    display: flex;
+    
+    
+    & > div:first-child{
+        transform: translateY(-25px);
+    }
+
+    .subUser{
+        margin-top: 15px;
+        align-self: self-start;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 1;
+
+        p{
+            margin-left: 15px;
+        }
+    }
+}
+
+.credentials{
+    background-color: v.$bg-dark;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    & > div{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p{
+            font-size: 12px;
+            font-weight: 600;
+            color: #80848E;
+        }
+
+        span{
+            font-size: 15px;
+        }
+
+        button{
+            flex: 0;
+        }
+    }
+}
+
+.innerContainer{
+    background-color: v.$black1;
+    padding: 0 15px 15px;
+    border-radius: 0 0 10px 10px;
+}

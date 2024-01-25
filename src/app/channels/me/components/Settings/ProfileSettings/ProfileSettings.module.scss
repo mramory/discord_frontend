@@ -1,0 +1,117 @@
+@use "../../../../../../styles/vars" as v;
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+
+  h4 {
+    color: v.$grey-light;
+    margin-bottom: 8px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+  }
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+  content: "";
+  background-color: #3f4147;
+  margin: 20px 0;
+}
+
+.avatar {
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+
+  .changeAva{
+    cursor: pointer;
+  }
+
+  button:not(.cloudinary) {
+    flex: 0;
+    padding: 10px 15px;
+    white-space: nowrap;
+
+    &:last-child {
+      background-color: transparent;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .cloudinary{
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.toast {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #111214;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+
+  p {
+    white-space: nowrap;
+  }
+
+  button {
+    flex: 0;
+    padding: 10px 15px;
+    white-space: nowrap;
+    &:first-child {
+      background-color: transparent;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.enter {
+  animation: fadeInRight 0.3s ease-out;
+}
+
+.leave {
+  animation: fadeOutLeft 0.3s ease-in forwards;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate(2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

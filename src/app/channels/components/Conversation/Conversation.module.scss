@@ -1,0 +1,133 @@
+@use "@/styles/vars" as v;
+
+.container{
+    font-size: 14px;
+    color: v.$font-color;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+
+    &:hover:not(.active){
+        background-color: #35373C;
+        color: #DBDEE1;
+
+        button{
+            display: block;
+        }
+    }
+
+    span{
+        font-weight: 500;
+    }
+
+    button{
+        margin-left: auto;
+        justify-self: end;
+        height: 1em;
+        font-size: 16px;
+        display: none;
+        cursor: pointer;
+        color: v.$font-color;
+
+        &:hover{
+            color: #DBDEE1;
+        }
+    }
+}
+
+.userBox{
+    justify-content: space-between;
+    cursor: auto;
+}
+
+.friendBox{
+    position: relative;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+
+    .line{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1px;
+        background-color: #3F4147;
+        width: 99%;
+    }
+
+    &:hover{
+        .roundedDiv{
+            background-color: #1C1D20;
+            color: #fff
+        }
+
+        .line{
+            display: none;
+        }
+    }
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: default;
+}
+
+.roundedDiv{
+    position: relative;
+    background-color: v.$bg-dark;
+    font-size: 18px;
+    color: #B5BAC1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+
+    &:hover{
+        .popup{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+.optionalBtns{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.popup{
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    background-color: #111214;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px;
+    top: -2.7em;
+
+    transition: visibility 0s, opacity 0.1s linear;
+
+    .triangle{
+        position: absolute;
+        bottom: -4.667px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #111214;
+    }
+}
+
+.active{
+    color: #DBDEE1;
+    background-color: #404249;
+}

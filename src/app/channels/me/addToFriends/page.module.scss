@@ -1,0 +1,19 @@
+@use "../../../../styles/vars" as v;
+
+.add{
+    color: v.$light-font-color;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.info{
+    color: v.$font-color;
+    font-size: 12px;
+}
+
+.line{
+    height: 1px;
+    background-color: #3F4147;
+    width: 100%;
+}

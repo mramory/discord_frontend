@@ -1,0 +1,49 @@
+
+.container{
+    padding: 10px;
+    width: 100%;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.box{
+    position: relative;
+    width: 720px;
+    height: 400px;
+
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    .videoPlaceholder{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+    }
+}
+
+.twoMore{
+    width: 655px;
+}
+
+.fourMore{
+    width: 400px;
+}
+

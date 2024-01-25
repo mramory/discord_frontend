@@ -1,0 +1,15 @@
+@use "@/styles/vars" as v;
+
+.button{
+    background-color: v.$primary-color;
+    padding: 15px;
+    width: 100%;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #4752C4;
+    }
+}

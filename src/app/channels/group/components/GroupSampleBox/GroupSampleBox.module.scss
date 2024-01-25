@@ -1,0 +1,26 @@
+
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 0.5px solid rgba(63, 65, 71, 0.24);
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    div{
+        display: flex;
+        align-items: center;
+    }
+
+    span{
+        color: #313338;
+        margin-left: 15px;
+    }
+
+    &:hover{
+        background-color: #EAEBED;
+    }
+}

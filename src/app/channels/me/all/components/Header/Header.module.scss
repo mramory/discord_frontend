@@ -1,0 +1,8 @@
+@use "../../../../../../styles/vars" as v;
+
+.amount{
+    margin: 20px 0;
+    font-size: 10px;
+    font-weight: 600;
+    color: v.$light-font-color;
+}

@@ -1,0 +1,126 @@
+@use "../../../../../styles/vars"as v;
+
+.container{
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    background-color: v.$black4;
+
+    .bar{
+        height: 100%;
+        background-color: v.$bg-dark;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        padding-right: 10px;
+
+        p{
+            margin-left: 7px;
+            margin-bottom: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #80848E;
+        }
+
+        & > div{
+            .active{
+                background-color: #404249;
+            }
+            
+            div{
+                cursor: pointer;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                padding: 5px 7px;
+                margin-bottom: 3px;
+
+                span{
+                    font-size: 15px;
+                }
+                
+                &:hover{
+                    background-color: #35373C;
+                }
+            }
+            
+        }
+
+    }
+
+    .main{
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        height: 100%;
+        background-color: v.$black4;
+        padding-left: 25px;
+        width: 790px;
+
+        .head{
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        h2{
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.innerContent{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 7fr 15fr;
+
+    & > div{
+        padding-top: 60px;
+    }
+}
+
+@keyframes open {
+    from {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+  
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+  }
+
+.open{
+    animation: open 0.2s;
+}
+
+.close{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    color: #B3B6B9;
+    position: absolute;
+    right: 0;
+
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px #B3B6B9 solid;
+        border-radius: 50%;
+        width: 2em;
+        height: 2em;
+        font-size: 18px;
+        color: #B3B6B9;
+    }
+
+    button{
+        cursor: pointer;
+    }
+}

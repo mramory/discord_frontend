@@ -1,0 +1,62 @@
+@use "../../../styles/vars" as v;
+
+.wrapper{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    width: 35rem;
+    background-color: v.$black4;
+    padding: 32px;
+    border-radius: 5px;
+}
+
+.credentials{
+    h2{
+        color: #fff;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+
+    h4{
+        color: v.$grey-light;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    p{
+        margin-top: 10px;
+        color: v.$grey-light2;
+        font-size: 12px;
+    }
+
+    &_register{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}
+
+.link{
+    color: #00A8FC;
+    font-size: 12px;
+    text-decoration: none;
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+.birthday_container{
+    display: flex;
+    gap: 13px;
+}

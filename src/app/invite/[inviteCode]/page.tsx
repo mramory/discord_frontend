@@ -1,11 +1,10 @@
 'use client'
 
 import { addServer } from "@/Redux/Slices/serverSlice"
-import { getCurrentUserId } from "@/actions/getCurrentUserId"
 import { ServerApiService } from "@/api/server/serverApi.service"
 import { useAppDispatch } from "@/hooks/useAppDispatch"
 import { useTypedSelector } from "@/hooks/useTypedSelector"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import toast from "react-hot-toast"
 

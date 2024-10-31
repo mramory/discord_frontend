@@ -1,9 +1,9 @@
 import { friendsApiService } from "@/api/friends/friendsApi.service"
-import { getCurrentUserId } from "./getCurrentUserId";
+import { getCookieByKey } from "./getCookieByKey";
 
 
 export const getFriendRequests = async () => {
-    const currentuserId = getCurrentUserId()
+    const currentuserId = getCookieByKey("currentUserId")
     if (currentuserId) {
         return await friendsApiService.getFriendRequests(+currentuserId)
     }

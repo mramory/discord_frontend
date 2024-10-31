@@ -4,10 +4,17 @@ import { AuthApiService } from "./auth/authApi.service";
 
 const serverAxiosInstance: AxiosInstance = axios.create({
     baseURL: "http://localhost:8000/",
-    headers: {
-        Authorization: `Bearer ${cookies().get("accessToken")?.value}`,
-    },
 });
+
+serverAxiosInstance.interceptors.request.use(
+    (config) => {
+        const accessToken = cookies().get("accessToken")?.value;
+        if (accessToken) {
+          config.headers["Authorization"] = `Bearer ${accessToken}`;
+        }
+        return config;
+      }
+)
 
 serverAxiosInstance.interceptors.response.use(
     async function (response) {

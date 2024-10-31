@@ -19,6 +19,7 @@ interface ConversationProps {
 }
 
 export const Conversation = ({ data, serverId }: ConversationProps) => {
+  console.log(data)
   const { push } = useRouter();
   const {conversationId: URLconversationId} = useParams()
 

@@ -1,9 +1,9 @@
 import { ServerApiService } from "@/api/server/serverApi.service";
-import { getCurrentUserId } from "./getCurrentUserId";
+import { getCookieByKey } from "./getCookieByKey";
 
 
 export const getAllServers = async () => {
-    const currentuserId = getCurrentUserId()
+    const currentuserId = getCookieByKey("currentUserId")
     if (currentuserId) {
         return await ServerApiService.getAllServers(+currentuserId)
     }

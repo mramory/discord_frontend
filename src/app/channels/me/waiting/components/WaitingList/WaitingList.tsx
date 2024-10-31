@@ -20,6 +20,10 @@ export default function WaitingList({initialData}: WaitingListProps) {
     const newRequestHandler = (newRequest: FriendRequestType) => {
         setWaiting(prev => [...prev, newRequest])
     }
+    
+    useEffect(() => {
+        setWaiting(initialData)
+    }, [initialData])
 
     useEffect(() => {
         if(currentUserId){

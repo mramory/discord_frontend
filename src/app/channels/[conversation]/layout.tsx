@@ -1,8 +1,10 @@
+'use client'
+
 import { Metadata } from "next";
 import { MySidebar } from "../components/MySidebar/MySidebar";
 import { UserInfoSidebar } from "./components/UserInfoSidebar/UserInfoSidebar";
+import { useEffect, useState } from "react";
 import { ConversationApiService } from "@/api/conversation/conversationApi.service";
-import serverAxiosInstance from "@/api/serverInstance";
 
 
 export const metadata: Metadata = {
@@ -17,15 +19,20 @@ export const metadata: Metadata = {
     children: React.ReactNode;
     params: { conversation: string }
   }) {
+      const [conversation, setConversation] = useState()
 
-    const conversation = await serverAxiosInstance.get(`conversation/${params.conversation}`)
-    .then(res => res.data)
-    // await ConversationApiService.getConversation(params.conversation)
+      useEffect(() => {
+        (async () => {
+          const conversation = await ConversationApiService.getConversation(params.conversation)
+          setConversation(conversation)
+        })()
+      }, [])
+
     return(
         <>
             <MySidebar />
             {children}
-            <UserInfoSidebar conversation={conversation} />
+            {conversation ? <UserInfoSidebar conversation={conversation} /> : null}
         </>
     ) 
   }

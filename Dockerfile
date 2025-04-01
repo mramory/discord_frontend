@@ -1,4 +1,4 @@
-FROM node:18-alpine AS FontProd
+FROM node:18-alpine AS front_prod
 
 WORKDIR /usr/src/front
 

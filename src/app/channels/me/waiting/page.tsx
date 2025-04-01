@@ -5,14 +5,11 @@ import WaitingList from "./components/WaitingList/WaitingList"
 import { useEffect, useState } from "react"
 
 
-export default function Page() {
+export default async function Page() {
     const [waiting, setWaiting] = useState([])
 
     useEffect(() => {
-        (async() => {
-            const data = await getFriendRequests()
-            setWaiting(data)
-        })()
+        getFriendRequests().then((res) => setWaiting(res))
     }, [])
     
     return(

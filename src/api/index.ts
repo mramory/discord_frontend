@@ -3,7 +3,7 @@ import { AuthApiService } from "./auth/authApi.service";
 import { redirect } from "next/navigation";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8000/',
+    baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
     withCredentials: true
 });
 

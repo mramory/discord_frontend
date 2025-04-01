@@ -3,7 +3,7 @@ import {cookies} from "next/headers";
 import { AuthApiService } from "./auth/authApi.service";
 
 const serverAxiosInstance: AxiosInstance = axios.create({
-    baseURL: "http://localhost:8000/",
+    baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
 
 serverAxiosInstance.interceptors.request.use(

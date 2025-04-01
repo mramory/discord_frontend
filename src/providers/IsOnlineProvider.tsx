@@ -13,7 +13,7 @@ export default function IsOnlineProvider({children}: {children: React.ReactNode}
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const clientSocket = io('http://localhost:8000')
+        const clientSocket = io(process.env.NEXT_PUBLIC_SERVER_URL!)
 
         clientSocket.on("connect", () => {
             if(currentUserId){

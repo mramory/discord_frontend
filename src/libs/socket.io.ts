@@ -7,7 +7,7 @@ const options = {
   transports : ["websocket"]
 }
 
-const socket = io('http://localhost:8000', options);
+const socket = io(process.env.NEXT_PUBLIC_SERVER_URL!, options);
 
 
 export default socket;

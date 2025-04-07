@@ -122,11 +122,11 @@ export default function ChannelsSidebar({ serverId }: ChannelsSidebarProps) {
             onClick={(e) => {
               toast("Copied", { position: "bottom-left" });
               navigator.clipboard.writeText(
-                process.env.NEXT_PUBLIC_BASE_URL + "invite/" + data?.inviteCode
+                process.env.NEXT_PUBLIC_BASE_URL + "/invite/" + data?.inviteCode
               );
             }}
           >
-            {process.env.NEXT_PUBLIC_BASE_URL + "invite/" + data?.inviteCode}
+            {process.env.NEXT_PUBLIC_BASE_URL + "/invite/" + data?.inviteCode}
           </span>
         </div>
         <AddChannel

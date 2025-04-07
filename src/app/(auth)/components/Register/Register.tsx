@@ -11,6 +11,7 @@ import { setUserData } from "@/Redux/Slices/authSlice"
 import { useAppDispatch } from "@/hooks/useAppDispatch"
 import {useRouter} from "next/navigation"
 import { returnRegisterData } from "@/utils/returnRegisterData"
+import { regExpForPass } from "../Login/Login"
 
 
 interface RegisterProps {
@@ -25,6 +26,13 @@ const Register: FC<RegisterProps> = ({toggleVariant}) => {
     const dispatch = useAppDispatch()
 
     const onSubmit = async (data: FieldValues) => {
+        if(!data.password.match(regExpForPass)){
+                    window.alert(`пароль должен содержать не менее восьми символов,
+                    включая хотя бы одно число и
+                    включает как строчные, так и прописные буквы и
+                    включать хотя бы один специальный символ: #, ?, !.`)
+                    return
+                }
         const response = await AuthApiService.register(returnRegisterData(data) as UserType)
         if(response){
             dispatch(setUserData(response))

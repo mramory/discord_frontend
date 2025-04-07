@@ -1,3 +1,4 @@
+import { RestoreArgs } from "@/app/restore_pass/page";
 import { instance } from "..";
 import { LoginArgs } from "./types";
 import { UserType } from "@/types/User";
@@ -49,5 +50,20 @@ export const AuthApiService = {
     async test() {
         return instance.get("auth/test")
         .then(res => res.data)
+    },
+    async restorePass(data: RestoreArgs) {
+        return instance.post("auth/restorePass", {...data})
+        .then(res => res.data)
+        .catch(err => null)
+    },
+    async sendEmail(data: RestoreArgs) {
+        return instance.post("auth/sendEmail", {...data})
+        .then(res => res.data)
+        .catch(err => null)
+    },
+    async loadUsersJson(filePath: string){
+        return instance.post("auth/loadUsersJson", {filePath})
+        .then(res => res.data)
+        .catch(err => null)
     }
 }

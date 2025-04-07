@@ -7,12 +7,13 @@ interface ButtonProps {
     type?: "submit" | "button" | undefined,
     style?: CSSProperties,
     onClick?: () => void,
-    form?: string
+    form?: string,
+    className?: string
 }
 
-const Button: FC<ButtonProps> = ({children, type, style, onClick, form}) => {
+const Button: FC<ButtonProps> = ({children, type, style, onClick, form, className}) => {
     return(
-        <button form={form} onClick={onClick} style={style} type={type} className={s.button}>{children}</button>
+        <button form={form} onClick={onClick} style={style} type={type} className={clsx(s.button, className)}>{children}</button>
     )
 }
 

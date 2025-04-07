@@ -12,22 +12,23 @@ import { Dispatch, SetStateAction } from "react";
 
 interface WaitingBoxProps {
   id: number;
-  user: UserType;
+  userName: string;
   setWaiting: Dispatch<SetStateAction<FriendRequestType[]>>
 }
 
 export default function WaitingBox({
-  user,
+  userName,
   setWaiting,
   id,
 }: WaitingBoxProps) {
+  console.log(userName)
   const acceptFriendRequest = async () => {
     const res = await friendsApiService.acceptFriendRequest(id);
     setWaiting(prev => prev.filter(req => req.senderUserId !== res.id))
   };
   const denyFriendRequest = async () => {
     const res = await friendsApiService.denyFriendRequest(id);
-    setWaiting(prev => prev.filter(req => req.id !== res.id))
+    setWaiting(prev => prev.filter(req => req.requestId !== res.id))
   };
 
   return (
@@ -41,7 +42,7 @@ export default function WaitingBox({
           contWidth={32}
           img="/pirat.jpg"
         />
-        <span>{user.name}</span>
+        <span>{userName}</span>
       </div>
       <div>
         <span

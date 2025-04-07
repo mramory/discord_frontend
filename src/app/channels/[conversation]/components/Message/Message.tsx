@@ -5,11 +5,18 @@ import { format } from "date-fns";
 import Image from "next/image";
 import ImageModal from "@/components/ImageModal/ImageModal";
 import { Dispatch, SetStateAction, useState } from "react";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { MessagesApiService } from "@/api/messages/messagesApi.service";
+import Button from "@/components/Button/Button";
 
 interface MessageProps {
   message: MessageType;
   prevMessage: MessageType;
   index: number;
+}
+
+const onDelete = (id: number) => {
+  return MessagesApiService.deleteMessage(id).then(() => window.location.reload())
 }
 
 export default function Message({ message, prevMessage, index }: MessageProps) {
@@ -49,6 +56,8 @@ const FirstMessage = ({
   isModalOpen,
   setIsModalOpen,
 }: FirstMessageProps) => {
+  const role = useTypedSelector((state) => state.auth.role);
+
   return (
     <div className={s.container}>
       <div className={s.avatar}>
@@ -89,6 +98,7 @@ const FirstMessage = ({
         ) : (
           <div className={s.text}>{message.text}</div>
         )}
+        {role === "ADMIN" ? <Button className={s.delete} onClick={() => onDelete(message.id)}>delete</Button> : null}
       </div>
     </div>
   );
@@ -100,6 +110,8 @@ const NotFirstMessage = ({
   setIsModalOpen,
   createdAt,
 }: FirstMessageProps) => {
+  const role = useTypedSelector((state) => state.auth.role);
+
   return (
     <div className={s.notFirstContainer}>
       <div className={s.timeStamp}>
@@ -128,6 +140,7 @@ const NotFirstMessage = ({
       ) : (
         <div className={s.text}>{message.text}</div>
       )}
+      {role === "ADMIN" ? <Button className={s.delete} onClick={() => onDelete(message.id)}>delete</Button> : null}
     </div>
   );
 };

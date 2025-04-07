@@ -111,7 +111,10 @@ export const ProfileSettings: FC<ProfileSettingsType> = ({ name, img }) => {
     const response = await UsersApiService.changeUser(
       {...data, img: base64} as { newName: string, img: string }
     );
-    setValue("img", response.img);
+
+    if(response?.img){
+      setValue("img", response.img);
+    }
     dispatch(setUserData(response));
     toast.dismiss(submitToastRef.current!);
     submitToastRef.current = null;

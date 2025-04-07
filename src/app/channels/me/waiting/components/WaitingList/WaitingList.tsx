@@ -24,6 +24,7 @@ export default function WaitingList({initialData}: WaitingListProps) {
     useEffect(() => {
         setWaiting(initialData)
     }, [initialData])
+    console.log({waiting})
 
     useEffect(() => {
         if(currentUserId){
@@ -39,7 +40,7 @@ export default function WaitingList({initialData}: WaitingListProps) {
 
     return(
         <div>
-            {waiting?.map((request: FriendRequestType) => <WaitingBox setWaiting={setWaiting} key={request.senderUserId} id={request.id} user={request.senderUser} />)}
+            {waiting?.map((request: FriendRequestType) => <WaitingBox setWaiting={setWaiting} key={request.senderUserId} id={request.requestId} userName={request.senderName} />)}
         </div>
     )
 }

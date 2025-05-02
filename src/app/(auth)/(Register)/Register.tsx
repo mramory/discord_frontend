@@ -11,7 +11,7 @@ import { setUserData } from "@/Redux/Slices/authSlice"
 import { useAppDispatch } from "@/hooks/useAppDispatch"
 import {useRouter} from "next/navigation"
 import { returnRegisterData } from "@/utils/returnRegisterData"
-import { regExpForPass } from "../Login/Login"
+import { regExpForPass } from "../Utils"
 
 
 interface RegisterProps {

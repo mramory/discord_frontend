@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { ERole } from "@/types/App/Enums";
 interface InitialState {
     accessToken: string,
     name: string,
     email: string,
-    role: string,
+    role: ERole,
     viewName: string,
     img: string,
     id: number | null
@@ -14,7 +14,7 @@ const initialState: InitialState = {
     accessToken: "",
     name: "",
     email: "",
-    role: "",
+    role: ERole.USER,
     viewName: "",
     img: "",
     id: null

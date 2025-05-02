@@ -8,7 +8,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { AuthApiService } from "@/api/auth/authApi.service";
 import { da } from "date-fns/locale";
 import toast from "react-hot-toast";
-import { regExpForPass } from "../(auth)/components/Login/Login";
+import { regExpForPass } from "../(auth)/(Login)/Login";
 
 export type RestoreArgs = {
     pass: string,

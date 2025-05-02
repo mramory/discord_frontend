@@ -1,4 +1,3 @@
-
 export enum AlignEnum {
     TOP,
     RIGHT,

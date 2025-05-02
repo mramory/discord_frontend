@@ -1,8 +1,8 @@
 "use client"
 
 import { useCallback, useState } from "react"
-import Login from "./Login/Login"
-import Register from "./Register/Register"
+import Login from "./(Login)/Login"
+import Register from "./(Register)/Register"
 
 type Variant = "LOGIN" | "REGISTER"
 

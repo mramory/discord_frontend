@@ -1,4 +1,4 @@
-import AuthComponent from './components/Auth'
+import AuthComponent from './Auth'
 import s from "./page.module.scss"
 
 

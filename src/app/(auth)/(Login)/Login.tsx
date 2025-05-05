@@ -1,3 +1,9 @@
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import s from "../style.module.scss";
 import { AuthApiService } from "@/api/auth/authApi.service";
 import { LoginArgs } from "@/api/auth/types";
 import Button from "@/components/Button/Button";
@@ -5,36 +11,18 @@ import Input from "@/components/Input/Input";
 import { AdminRoleGuard } from "@/guards/RoleGuard";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { setUserData } from "@/Redux/Slices/authSlice";
-import { appRoleSelector } from "@/selectors/AppSelectors";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import {
-  ChangeEvent,
-  FC,
-  useState
-} from "react";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
-import s from "../style.module.scss";
 
 interface LoginProps {
-  toggleVariant: () => void;
+  toggleVariant: () => void; 
 }
 
 const Login: FC<LoginProps> = ({ toggleVariant }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginArgs>();
-
-  const role = useSelector(appRoleSelector);
+  const { register, handleSubmit } = useForm<LoginArgs>(); 
 
   const { push } = useRouter();
-
+ 
   const dispatch = useAppDispatch();
-
+ 
   const onSubmit = async (data: LoginArgs) => {
     const response = await AuthApiService.login(data);
 
@@ -49,22 +37,17 @@ const Login: FC<LoginProps> = ({ toggleVariant }) => {
     }
   };
 
-  const [file, setFile] = useState(null);
-  const [message, setMessage] = useState("");
+  const [file, setFile] = useState<File | null>(null);
 
-  const handleFileChange = (e: ChangeEvent) => {
-    //@ts-ignore
-    setFile(e.target.files[0]);
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFile(e.target.files?.[0] ?? null);
   };
 
   const handleUpload = async () => {
     if (!file) {
-      setMessage("Пожалуйста, выберите файл");
       return;
     }
-    console.log(file);
     try {
-      //@ts-ignore
       const response = await AuthApiService.loadUsersJson(file.name);
 
       if (response) {
@@ -72,8 +55,8 @@ const Login: FC<LoginProps> = ({ toggleVariant }) => {
       } else {
         toast.error("Пользователи с таким email уже зарегистрированны");
       }
-    } catch (error) {
-      setMessage("Ошибка при отправке данных");
+    } catch {
+      toast.error("Ошибка при отправке данных");
     }
   };
 

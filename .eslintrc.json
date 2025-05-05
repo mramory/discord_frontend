@@ -1,12 +1,102 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:react/recommended"],
-  "plugins": ["react"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["react", "@typescript-eslint", "import"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "react/jsx-newline": ["error", { "prevent": false }],
     "react/jsx-max-props-per-line": ["error", { "maximum": 3, "when": "multiline" }],
     "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
     "react/jsx-indent": ["error", 2],
     "react/jsx-indent-props": ["error", 2],
-    "react/react-in-jsx-scope": "off"
+    
+    // Правила для пробелов вокруг скобок
+    "space-in-parens": ["error", "never"],
+    "space-before-blocks": ["error", "always"],
+    "object-curly-spacing": ["error", "always"],
+    "space-infix-ops": "error",
+    "func-call-spacing": ["error", "never"],
+    
+    // Правила для TypeScript комментариев
+    "@typescript-eslint/ban-ts-comment": ["error", {
+      "ts-expect-error": "allow-with-description",
+      "ts-ignore": true,
+      "ts-nocheck": true,
+      "ts-check": false,
+      "minimumDescriptionLength": 10
+    }],
+    
+    // Правила для запятых
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "comma-style": ["error", "last"],
+    "comma-dangle": ["error", "always-multiline"],
+    
+    // Запрет магических строк
+    "no-magic-numbers": ["error", {
+      "ignore": [-1, 0, 1, 2],
+      "ignoreArrayIndexes": true,
+      "enforceConst": true
+    }],
+    
+    // Запрет неиспользуемых переменных
+    "no-unused-vars": ["error", {
+      "vars": "all",
+      "args": "after-used",
+      "ignoreRestSiblings": false
+    }],
+    
+    // Запрет необъявленных переменных
+    "no-undef": "error",
+    
+    // Требование констант для значений, которые не меняются
+    "prefer-const": ["error", {
+      "destructuring": "all",
+      "ignoreReadBeforeAssign": false
+    }],
+    
+    // Запрет var
+    "no-var": "error",
+    
+    // Требование использования let/const
+    "no-implicit-globals": "error",
+    
+    // Запрет неиспользуемых параметров
+    "no-unused-expressions": "error",
+    
+    // Запрет any
+    "@typescript-eslint/no-explicit-any": "error",
+    
+    // Требование описания типов для параметров
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    
+    // Запрет неиспользуемых импортов
+    "import/no-unused-modules": "error",
+    
+    // Требование описания типов для пропсов
+    "react/prop-types": "error",
+    
+    // Запрет неиспользуемых пропсов
+    "react/no-unused-prop-types": "error",
+    "react/react-in-jsx-scope": "off",
+    
+    // Import sorting rules
+    "import/order": ["error", {
+      "groups": [
+        "builtin",
+        "external",
+        "internal",
+        "parent",
+        "sibling",
+        "index"
+      ],
+      "newlines-between": "never",
+      "alphabetize": {
+        "order": "asc",
+        "caseInsensitive": true
+      }
+    }]
   }
 }

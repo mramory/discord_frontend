@@ -1,6 +1,6 @@
+import { useSelector } from "react-redux";
 import { appRoleSelector } from "@/selectors/AppSelectors";
 import { ERole } from "@/types/App/Enums";
-import { useSelector } from "react-redux";
 import { IWithChildren } from "@/types/App/UtilTypes";
 
 interface IRoleGuardProps extends IWithChildren {
@@ -21,4 +21,4 @@ const AdminRoleGuard = ({ children }: IWithChildren) => {
     return <RoleGuard allowedRoles={[ERole.ADMIN]}>{children}</RoleGuard>
 }
 
-export { AdminRoleGuard }
+export { AdminRoleGuard };

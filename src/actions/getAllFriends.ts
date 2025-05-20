@@ -1,5 +1,5 @@
-import { friendsApiService } from "@/api/friends/friendsApi.service"
 import { getCookieByKey } from "./getCookieByKey";
+import { friendsApiService } from "@/api/friends/friendsApi.service";
 
 
 export const getAllFriends = async () => {

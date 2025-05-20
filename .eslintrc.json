@@ -69,8 +69,6 @@
     // Запрет any
     "@typescript-eslint/no-explicit-any": "error",
     
-    // Требование описания типов для параметров
-    "@typescript-eslint/explicit-module-boundary-types": "error",
     
     // Запрет неиспользуемых импортов
     "import/no-unused-modules": "error",

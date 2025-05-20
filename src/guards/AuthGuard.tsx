@@ -1,16 +1,15 @@
 "use client";
 
-import { setUserData } from "@/Redux/Slices/authSlice";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { AuthApiService } from "@/api/auth/authApi.service";
 import { Loading } from "@/components/Loading/Loading";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
-import { setCookie, deleteCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { setUserData } from "@/Redux/Slices/authSlice";
+import { IWithChildren } from "@/types/App/UtilTypes";
 
 
-export default function AuthGuard({ children }: { children: React.ReactNode }) {
+export default function AuthGuard({ children }: IWithChildren) {
   const { push } = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -21,7 +20,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
       const user = await AuthApiService.checkIsAuth();
       if (!user) {
         console.log("redirect")
-        push("/");
+        push("/login");
       } else {
         console.log("success")
         dispatch(setUserData(user));

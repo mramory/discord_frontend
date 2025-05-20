@@ -1,5 +1,10 @@
 @use "@styles/vars" as v;
 
+.backgound_image{
+    background-image: url("/loginBack.jpg");
+    background-size: cover;
+}
+
 .wrapper{
     height: 100vh;
     display: flex;

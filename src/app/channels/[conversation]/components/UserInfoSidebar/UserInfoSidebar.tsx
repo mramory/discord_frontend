@@ -1,13 +1,12 @@
 "use client";
-import s from "./UserInfoSidebar.module.scss";
-import { ConversationType } from "@/types/Conversation";
-import { useOtherUser } from "@/hooks/useOtherUser";
-import { Avatar } from "@/components/Avatar/Avatar";
-import {MdArrowForwardIos} from "react-icons/md"
 import clsx from "clsx";
-import { useEffect, useState } from "react";
 import { format } from "date-fns";
-import { UserType } from "@/types/User";
+import { useState } from "react";
+import { MdArrowForwardIos } from "react-icons/md";
+import s from "./UserInfoSidebar.module.scss";
+import { Avatar } from "@/components/Avatar/Avatar";
+import { useOtherUser } from "@/hooks/useOtherUser";
+import { ConversationType } from "@/types/Conversation";
 
 interface UserInfoSidebarProps {
   conversation: ConversationType;
@@ -39,29 +38,39 @@ export function UserInfoSidebar({ conversation }: UserInfoSidebarProps) {
           round={true}
           img="/pirat.jpg"
         />
+
         <div className={s.infoBox}>
           <div className={s.head}>
             <p>{otherUser.viewName}</p>
+
             <p>{otherUser.email}</p>
           </div>
+
           <div className={s.main}>
             <div className={s.aboutMe}>
               <p>ОБО МНЕ</p>
+
               <p>Krutak</p>
             </div>
+
             <div className={s.since}>
               <p>В ЧИСЛЕ УЧАСТНИКОВ DISCORD С</p>
+
               <p>{format(new Date(otherUser.createdAt), "PP")}</p>
             </div>
           </div>
+
           <div className={s.bottom}>
             <p>ЗАМЕТКА</p>
+
             <input placeholder="Нажмите, чтобы добавить заметку"></input>
           </div>
         </div>
+
         <div onClick={openServers} className={clsx(s.infoBox, s.servers)}>
-            <p>2 общих сервера</p>
-            <div className={isOwnServersOpen ? s.open : s.close} style={{marginLeft: "auto"}}><MdArrowForwardIos /></div>
+          <p>2 общих сервера</p>
+
+          <div className={isOwnServersOpen ? s.open : s.close} style={{ marginLeft: "auto" }}><MdArrowForwardIos /></div>
         </div>
       </div>
     </div>

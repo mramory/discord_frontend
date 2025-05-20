@@ -1,8 +1,9 @@
 import { Metadata } from "next";
+import { ReactNode } from "react";
 import { MySidebar } from "../components/MySidebar/MySidebar";
 import { RightMySidebar } from "../components/RightMySidebar/RightMySidebar";
 import Header from "./components/Header/Header";
-import s from "./page.module.scss"
+import s from "./page.module.scss";
 
 
 export const metadata: Metadata = {
@@ -13,19 +14,22 @@ export const metadata: Metadata = {
   export default async function MeLayout({
     children,
   }: {
-    children: React.ReactNode;
+    children: ReactNode;
   }) {
 
     return(
-        <>
-            <MySidebar />
-            <div className={s.container}>
-              <Header />
-              <div className={s.pageContainer}>
-                {children}
-              </div>
-            </div>
-            <RightMySidebar />
-        </>
+      <>
+        <MySidebar />
+
+        <div className={s.container}>
+          <Header />
+
+          <div className={s.pageContainer}>
+            {children}
+          </div>
+        </div>
+
+        <RightMySidebar />
+      </>
     ) 
   }

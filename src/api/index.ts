@@ -1,10 +1,9 @@
 import axios from "axios";
 import { AuthApiService } from "./auth/authApi.service";
-import { redirect } from "next/navigation";
 
 const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
-    withCredentials: true
+    withCredentials: true,
 });
 
 
@@ -18,7 +17,7 @@ instance.interceptors.response.use(
             originalRequest._retry = true;
 
             const response = await AuthApiService.refreshToken()
-            if(!response){
+            if(!response) {
                 console.log("redirect")
             } 
 
@@ -29,7 +28,7 @@ instance.interceptors.response.use(
             instance.defaults.headers.common["Authorization"] = ""
         }
 
-        return error;
+        throw error;
     }
 )
 
@@ -41,6 +40,6 @@ instance.interceptors.response.use(
 //         return Promise.reject(error);
 //     })
 
-export { instance }
+export { instance };
 
 

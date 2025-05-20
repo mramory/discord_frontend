@@ -1,14 +1,14 @@
 'use client'
 
+import { useEffect, useState } from "react";
 import { MySidebar } from "../components/MySidebar/MySidebar";
 import { UserInfoSidebar } from "./components/UserInfoSidebar/UserInfoSidebar";
-import { useEffect, useState } from "react";
 import { ConversationApiService } from "@/api/conversation/conversationApi.service";
 
   
   export default async function MainLayout({
     children,
-    params 
+    params, 
   }: {
     children: React.ReactNode;
     params: { conversation: string }
@@ -23,10 +23,12 @@ import { ConversationApiService } from "@/api/conversation/conversationApi.servi
       }, [])
 
     return(
-        <>
-            <MySidebar />
-            {children}
-            {conversation ? <UserInfoSidebar conversation={conversation} /> : null}
-        </>
+      <>
+        <MySidebar />
+
+        {children}
+
+        {conversation ? <UserInfoSidebar conversation={conversation} /> : null}
+      </>
     ) 
   }

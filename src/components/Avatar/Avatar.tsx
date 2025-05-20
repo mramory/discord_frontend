@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import Image from "next/image";
 import s from "./Avatar.module.scss";
-import clsx from "clsx";
 
 interface AvatarProps {
   text?: string;
@@ -31,7 +31,7 @@ export const Avatar = ({
   round,
   onclick,
   online,
-  showOnline
+  showOnline,
 }: AvatarProps) => {
   return (
     <div
@@ -53,6 +53,7 @@ export const Avatar = ({
               src={img}
               alt="name"
             />
+
             <div className={s.isOnline}>
               <div className={clsx(online ? s.online : s.offline)}></div>
             </div>

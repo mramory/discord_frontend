@@ -1,6 +1,6 @@
 import { CSSProperties } from "react"
+import { FieldValues, Path, UseFormRegister } from "react-hook-form"
 import s from "./Input.module.scss"
-import {UseFormRegister, FieldValues, FieldValue, Path} from "react-hook-form"
 
 interface InputProps<T> {
     label: string,
@@ -9,15 +9,19 @@ interface InputProps<T> {
     id: Path<T extends FieldValues ? T : any>,
     style?: CSSProperties,
     required?: boolean,
-    register: UseFormRegister<T extends FieldValues ? T : any>
+    register: UseFormRegister<T extends FieldValues ? T : any>,
+    error?: string
 }
 
-function Input<T>({label, placeholder, type, id, style, required, register}: InputProps<T>) {
+function Input<T>({ label, placeholder, type, id, style, required, register, error }: InputProps<T>) {
     return(
-        <div style={style} className={s.container}>
-            <label>{label}{required ? <span className={s.required}> *</span> : null}</label>
-            <input type={type} {...register(id, {required})} id={id} placeholder={placeholder}></input>
-        </div>
+      <div style={style} className={s.container}>
+        <label>{label}{required ? <span className={s.required}> *</span> : null}</label>
+
+        <input type={type} {...register(id, { required })} id={id} placeholder={placeholder}></input>
+
+        {error ? <span className={s.error}>{error}</span> : null}
+      </div>
     )
 }
 

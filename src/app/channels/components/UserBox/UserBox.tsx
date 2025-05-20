@@ -1,13 +1,13 @@
 'use client'
 
-import {useMemo} from "react"
-import { Avatar } from "@/components/Avatar/Avatar";
-import s from "../Conversation/Conversation.module.scss";
-import { UserType } from "@/types/User";
 import clsx from "clsx";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
-import { friendsApiService } from "@/api/friends/friendsApi.service";
+import { MouseEvent, useMemo } from "react";
 import toast from "react-hot-toast";
+import s from "../Conversation/Conversation.module.scss";
+import { friendsApiService } from "@/api/friends/friendsApi.service";
+import { Avatar } from "@/components/Avatar/Avatar";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { UserType } from "@/types/User";
 
 interface UserBoxProps {
   user: UserType;
@@ -19,9 +19,9 @@ export default function UserBox({ user }: UserBoxProps) {
 
   const currentUserId = useTypedSelector(state => state.auth.id)
 
-  const sendFriendRequest = async (e: React.MouseEvent<HTMLSpanElement>, id: number) => {
+  const sendFriendRequest = async (e: MouseEvent<HTMLSpanElement>, id: number) => {
     e.stopPropagation()
-    if(currentUserId){
+    if(currentUserId) {
       friendsApiService.sendRequest(id, currentUserId)
       .then(() => toast.success("Friend Request Send!"))
       .catch(err => {
@@ -49,9 +49,12 @@ export default function UserBox({ user }: UserBoxProps) {
           img="/pirat.jpg"
           online
         />
+
         <span>{user.name}</span>
+
         {isOnline && <span>В сети</span>}
       </div>
+
       <span onClick={(e) => sendFriendRequest(e, user.id)} style={{ fontSize: "28px", cursor: "pointer" }}>+</span>
     </div>
   );

@@ -1,13 +1,13 @@
-import { RestoreArgs } from "@/app/restore_pass/page";
 import { instance } from "..";
 import { LoginArgs } from "./types";
+import { RestoreArgs } from "@/app/restore_pass/page";
 import { UserType } from "@/types/User";
 
 
 export const AuthApiService = {
 
     async login(data: LoginArgs) {
-        return instance.post("auth/login", {...data})
+        return instance.post("auth/login", { ...data })
         .then(res => {
             instance.defaults.headers.common[
                 "Authorization"
@@ -15,13 +15,16 @@ export const AuthApiService = {
             return res.data
         })
     },
-    async register(data: UserType) {
-        return instance.post("auth/register", {...data})
+    async register(data: Omit<UserType, "id" | "createdAt" | "img">) {
+        return instance.post("auth/register", { ...data })
         .then(res => {
             instance.defaults.headers.common[
                 "Authorization"
             ] = `Bearer ${res.data.accessToken}`;
             return res.data
+        })
+        .catch(err => {
+            throw err
         })
     },
     async logout() {
@@ -52,18 +55,18 @@ export const AuthApiService = {
         .then(res => res.data)
     },
     async restorePass(data: RestoreArgs) {
-        return instance.post("auth/restorePass", {...data})
+        return instance.post("auth/restorePass", { ...data })
         .then(res => res.data)
         .catch(err => null)
     },
     async sendEmail(data: RestoreArgs) {
-        return instance.post("auth/sendEmail", {...data})
+        return instance.post("auth/sendEmail", { ...data })
         .then(res => res.data)
         .catch(err => null)
     },
-    async loadUsersJson(filePath: string){
-        return instance.post("auth/loadUsersJson", {filePath})
+    async loadUsersJson(filePath: string) {
+        return instance.post("auth/loadUsersJson", { filePath })
         .then(res => res.data)
         .catch(err => null)
-    }
+    },
 }

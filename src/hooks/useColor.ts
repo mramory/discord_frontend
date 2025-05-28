@@ -1,9 +1,9 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import useImageColor from "use-image-color";
 
 
 export const useColor = (img: string) => {
-    const { colors } = useImageColor(img, {cors: true});
+    const { colors } = useImageColor(img, { cors: true });
     const [color, setColor] = useState<string>("");
 
     useLayoutEffect(() => {

@@ -1,5 +1,5 @@
-import axios, {AxiosInstance} from "axios";
-import {cookies} from "next/headers";
+import axios, { AxiosInstance } from "axios";
+import { cookies } from "next/headers";
 import { AuthApiService } from "./auth/authApi.service";
 
 const serverAxiosInstance: AxiosInstance = axios.create({
@@ -26,7 +26,7 @@ serverAxiosInstance.interceptors.response.use(
             originalRequest._retry = true;
 
             const response = await AuthApiService.refreshToken()
-            if(!response){
+            if(!response) {
                 console.log("redirect")
             } 
 

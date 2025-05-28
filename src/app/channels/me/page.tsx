@@ -1,26 +1,16 @@
-"use client"
+'use server';
 
-import { useEffect, useState } from "react"
-import { AllFriendsPage } from "./all/components/AllFriendsPage/AllFriendsPage"
-import { friendsApiService } from "@/api/friends/friendsApi.service"
-import { useTypedSelector } from "@/hooks/useTypedSelector"
-import { UserType } from "@/types/User"
+import { cookies } from "next/headers";
+import { AllFriendsPage } from "./all/components/AllFriendsPage/AllFriendsPage";
 
-
-export default function MyPage() {
-  const id = useTypedSelector(state => state.auth.id)
-
-  const [friends, setFriends] = useState<UserType[]>([])
-  
-  // await getAllFriends()
-  useEffect(() => {
-    if(id) {
-      friendsApiService.getAllFriends(id!)
-      .then(res => setFriends(res))
+export default async function MyPage() {  
+  const friends = await fetch('http://localhost:9200/friends', {
+    headers: {
+      'Authorization': `Bearer ${cookies().get('AccessToken')?.value}`
     }
-  }, [id])
+  }).then(res => res.json());
 
-    return(
-      <AllFriendsPage online={true} initFriends={friends} />
-    )
+  return (
+    <AllFriendsPage online={true} initFriends={friends} />
+  );
 }

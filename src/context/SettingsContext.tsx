@@ -1,28 +1,34 @@
-import { Settings } from "@/app/channels/me/components/Settings/Settings"
-import { createContext, useCallback, useReducer, useState, Dispatch } from "react"
+"use client";
+
+import { Settings } from "@/app/channels/me/components/Settings/Settings";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 type ContextType = {
     isOpen: boolean
-    toggleIsOpen: (e: KeyboardEvent) => void
+    open: () => void
+    close: () => void
 }
 
 export const SettingsContext = createContext<ContextType>({
     isOpen: false,
-    toggleIsOpen: () => {},
+    open: () => {},
+    close: () => {},
 })
-
 
 type StateType = {
     page: string
 }
-export enum Type {
+
+enum Type {
     CHANGE_PAGE = "CHANGE_PAGE"
 }
+
 type ActionType = {
     type: Type
     payload: string
 }
-export function reducer(state: StateType, action: ActionType) {
+
+function reducer(state: StateType, action: ActionType) {
     switch (action.type) {
         case "CHANGE_PAGE": {
             return {
@@ -34,23 +40,39 @@ export function reducer(state: StateType, action: ActionType) {
     }
 }
 
-
-
-export function SettingsContextComponent({children}: {children: React.ReactNode}) {
-
+function SettingsContextComponent({children}: {children: React.ReactNode}) {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const toggleIsOpen = useCallback((e: KeyboardEvent | MouseEvent) => {
-        if(e.type === 'click' || (e as KeyboardEvent).key === 'Escape'){
-            setIsOpen(prev => !prev)
-        }
+    const open = useCallback(() => {
+        setIsOpen(true)
     }, [])
 
+    const close = useCallback(() => {
+        setIsOpen(false)
+    }, [])
+
+    const handleEscape = useCallback((e: KeyboardEvent) => {
+        if(e.key === "Escape") {
+            close()
+        }
+    }, [close])
+
+    useEffect(() => {
+        document.addEventListener("keydown", handleEscape);
+
+        return () => {
+          document.removeEventListener("keydown", handleEscape);
+        };
+    }, []);
+
     return(
-        <SettingsContext.Provider value={{toggleIsOpen, isOpen}}>
-            {children}
-            {isOpen && <Settings />}
-        </SettingsContext.Provider>
+      <SettingsContext.Provider value={{ open, close, isOpen }}>
+        {children}
+
+        {isOpen && <Settings />}
+      </SettingsContext.Provider>
     )
 }
+
+export { reducer, SettingsContextComponent, Type };
 

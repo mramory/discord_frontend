@@ -1,11 +1,12 @@
-import { AxiosError } from "axios";
-import toast from "react-hot-toast";
 import { AuthApiService } from "@/api/auth/authApi.service";
 import { LoginArgs } from "@/api/auth/types";
 import { IRegisterFormModel } from "@/app/(auth)/register/RegisterForm/RegisterFormModel";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
-import { setUserData } from "@/Redux/Slices/authSlice";
+import socket from "@/libs/socket.io";
+import { clearUserData, setUserData } from "@/Redux/Slices/authSlice";
 import { returnRegisterData } from "@/utils/returnRegisterData";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 const useLoginService = () => {
   const dispatch = useAppDispatch();
@@ -66,4 +67,31 @@ const useRegisterService = () => {
     }
 }
 
-export { useLoginService, useRegisterService };
+const useLogoutService = () => {
+    const dispatch = useAppDispatch();
+
+    const logout = async () => {
+        try {
+            const {userId} = await AuthApiService.logout();
+
+            socket.emit("new_offline_user", userId);
+
+            dispatch(clearUserData());
+
+            localStorage.removeItem("token");
+
+            toast.success("Вы успешно вышли из системы");
+        } catch {
+            toast.error("Ошибка при выходе из системы");
+            
+            return false;
+        }
+    };
+
+    return {
+        logout,
+    };
+};
+
+export { useLoginService, useLogoutService, useRegisterService };
+

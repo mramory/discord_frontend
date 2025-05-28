@@ -1,7 +1,7 @@
-import { instance } from "..";
-import { LoginArgs } from "./types";
 import { RestoreArgs } from "@/app/restore_pass/page";
 import { UserType } from "@/types/User";
+import { instance } from "..";
+import { LoginArgs } from "./types";
 
 
 export const AuthApiService = {
@@ -29,10 +29,11 @@ export const AuthApiService = {
     },
     async logout() {
         return instance.get("auth/logout")
-        .then(() => {
+        .then(res => {
             instance.defaults.headers.common[
                 "Authorization"
             ] = "";
+            return res.data
         })
     },
     async refreshToken() {

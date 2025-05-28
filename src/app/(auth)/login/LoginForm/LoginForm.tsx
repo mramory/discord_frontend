@@ -9,7 +9,7 @@ import Input from "@/components/Input/Input";
 
 const LoginForm = () => {
     const { register, onSubmit, errors } = useLoginForm(); 
-
+  
     return (
       <form onSubmit={onSubmit}>
         <Input<ILoginForm["email"]>
@@ -20,6 +20,7 @@ const LoginForm = () => {
           id="email"
           placeholder=""
           error={errors.email?.message}
+          
         />
 
         <Input<ILoginForm["password"]>
@@ -30,6 +31,7 @@ const LoginForm = () => {
           id="password"
           placeholder=""
           error={errors.password?.message}
+          autoComplete="on"
         />
 
         <div style={{ marginTop: "6px", marginBottom: "22px" }}>

@@ -1,8 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { useCallback, useContext } from "react";
-import s from "./CurrentUserBox.module.scss";
 import { Avatar } from "@/components/Avatar/Avatar";
 import Tag from "@/components/Tag/Tag";
 import { SettingsContext } from "@/context/SettingsContext";
@@ -10,6 +7,9 @@ import { AlignEnum } from "@/contstants";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { toggleMuted, toggleSilent } from "@/Redux/Slices/mediaSlice";
+import Image from "next/image";
+import { useCallback, useContext } from "react";
+import s from "./CurrentUserBox.module.scss";
 
 
 export const CurrentUserBox = () => {
@@ -86,8 +86,7 @@ export const CurrentUserBox = () => {
           </Tag>
 
           <Tag align={AlignEnum.TOP} text="Настройки пользователя">
-            {/* @ts-ignore */}
-            <div onClick={settingsContext.toggleIsOpen}>
+            <div onClick={settingsContext.open}>
               <Image alt="settings" width={20} height={20} src="/settings.svg" />
             </div>
           </Tag>

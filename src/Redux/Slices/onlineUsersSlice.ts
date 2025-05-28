@@ -5,7 +5,7 @@ type InitialStateType = {
 }
 
 const initialState: InitialStateType = {
-    usersId: []
+    usersId: [],
 }
 
 export const onlineUsersSlice = createSlice({
@@ -14,8 +14,8 @@ export const onlineUsersSlice = createSlice({
     reducers: {
         setOnlineUsers(state, action) {
             state.usersId = [...action.payload]
-        }
-    }
+        },
+    },
 })
 
 export const { setOnlineUsers } = onlineUsersSlice.actions

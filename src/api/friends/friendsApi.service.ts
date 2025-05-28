@@ -2,8 +2,8 @@ import { instance } from ".."
 
 export const friendsApiService = {
 
-    async getAllFriends(currentUserId: number) {
-        return instance.get(`friends?currentUserId=${currentUserId}`)
+    async getAllFriends() {
+        return instance.get(`friends`)
         .then(res => res.data)
         .catch(err => null) // Implement Normal Error Handler !!!
     },

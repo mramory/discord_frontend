@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AuthApiService } from "@/api/auth/authApi.service";
 import { Loading } from "@/components/Loading/Loading";
@@ -8,9 +8,12 @@ import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { setUserData } from "@/Redux/Slices/authSlice";
 import { IWithChildren } from "@/types/App/UtilTypes";
 
+const ROUTES_WHICH_NOT_NEED_AUTH = ["/login", "/register"];
 
 export default function AuthGuard({ children }: IWithChildren) {
   const { push } = useRouter();
+  const pathname = usePathname();
+  
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const dispatch = useAppDispatch();
@@ -29,9 +32,13 @@ export default function AuthGuard({ children }: IWithChildren) {
       setIsLoading(false);
     };
 
-    checkUser();
+    if (ROUTES_WHICH_NOT_NEED_AUTH.includes(pathname)) {
+      setIsLoading(false);
+    } else {
+      checkUser();
+    }
 
-  }, [dispatch, push]);
+  }, [dispatch, push, pathname]);
 
   if (isLoading) {
     return <Loading />;

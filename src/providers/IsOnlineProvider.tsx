@@ -3,8 +3,6 @@ import { useAppDispatch } from "@/hooks/useAppDispatch"
 import { useTypedSelector } from "@/hooks/useTypedSelector"
 import socket from "@/libs/socket.io"
 import { useEffect } from "react"
-import { io } from "socket.io-client"
-
 
 export default function IsOnlineProvider({children}: {children: React.ReactNode}) {
 
@@ -13,21 +11,27 @@ export default function IsOnlineProvider({children}: {children: React.ReactNode}
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const clientSocket = io(process.env.NEXT_PUBLIC_SERVER_URL!)
+        if(currentUserId){
+            socket.emit("new_online_user", currentUserId);
+        }
 
-        clientSocket.on("connect", () => {
+        if(!currentUserId){
+            socket.emit("new_offline_user", currentUserId);
+        }
+
+        socket.on("connect", () => {
             if(currentUserId){
                 socket.emit("new_online_user", currentUserId);
             }
         })
 
-        clientSocket.on("disconnect", () => {
+        socket.on("disconnect", () => {
             if(currentUserId){
                 socket.emit("new_offline_user", currentUserId);
             }
         })
 
-        clientSocket.on("get_online_users", (usersId) => {
+        socket.on("get_online_users", (usersId) => {
             dispatch(setOnlineUsers(usersId))
         })
 
@@ -38,9 +42,9 @@ export default function IsOnlineProvider({children}: {children: React.ReactNode}
         })
 
         return () => {
-            clientSocket.off("get_online_users")
-            clientSocket.off("disconnect")
-            clientSocket.off("connect")
+            socket.off("get_online_users")
+            socket.off("disconnect")
+            socket.off("connect")
             window.removeEventListener("beforeunload", function (e) {
                 if(currentUserId){
                     socket.emit("new_offline_user", currentUserId);

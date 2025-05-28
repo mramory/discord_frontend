@@ -6,7 +6,6 @@ const instance = axios.create({
     withCredentials: true,
 });
 
-
 instance.interceptors.response.use(
     async function (response) {
         return response

@@ -1,14 +1,14 @@
 "use client";
 
-import { useTypedSelector } from "@/hooks/useTypedSelector";
-import { Conversation } from "../Conversation/Conversation";
-import s from "./MySidebar.module.scss";
-import { ConversationApiService } from "@/api/conversation/conversationApi.service";
-import { pusherClient } from "@/libs/pusher";
-import { ConversationType } from "@/types/Conversation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { Conversation } from "../Conversation/Conversation";
 import { CurrentUserBox } from "./CurrentUserBox/CurrentUserBox";
+import s from "./MySidebar.module.scss";
+import { ConversationApiService } from "@/api/conversation/conversationApi.service";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { pusherClient } from "@/libs/pusher";
+import { ConversationType } from "@/types/Conversation";
 
 export const MySidebar = () => {
   const queryClient = useQueryClient();
@@ -48,6 +48,7 @@ export const MySidebar = () => {
       <div className={s.container}>
         <div className={s.header}>
           <span style={{ fontWeight: "500" }}>ЛИЧНЫЕ СООБЩЕНИЯ</span>
+
           <span
             style={{
               fontSize: "20px",
@@ -59,10 +60,12 @@ export const MySidebar = () => {
             +
           </span>
         </div>
+
         {conversations?.map((conversation: ConversationType) => {
           return <Conversation key={conversation.id} data={conversation} />;
         })}
       </div>
+
       <CurrentUserBox />
     </div>
   );

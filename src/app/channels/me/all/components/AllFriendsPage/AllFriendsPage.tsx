@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Header from "../Header/Header";
-import { UserType } from "@/types/User";
-import FriendBox from "../FriendBox/FriendBox";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { UserType } from "@/types/User";
+import { useEffect, useState } from "react";
+import FriendBox from "../FriendBox/FriendBox";
+import Header from "../Header/Header";
 
 interface AllFriendsPageProps {
   initFriends: UserType[];
@@ -19,6 +19,7 @@ export const AllFriendsPage = ({
 
   const [onlineFriends, setOnlineFriends] = useState<UserType[]>([])
 
+
   useEffect(() => {
     const newOnlineFriends = initFriends?.filter(user => onlineFriendsId.includes(user.id.toString()))
     setOnlineFriends(newOnlineFriends)
@@ -30,6 +31,10 @@ export const AllFriendsPage = ({
       ? onlineFriends
       : initFriends
   );
+  console.log(friends, onlineFriends, initFriends)
+  useEffect(() => {
+    setFriends(online ? onlineFriends : initFriends);
+  }, [online, onlineFriends, initFriends]);
 
   const [search, setSearch] = useState<string>("");
 

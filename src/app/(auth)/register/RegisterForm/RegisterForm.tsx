@@ -21,7 +21,7 @@ const RegisterForm = () => {
 
       <BirthDaySelect 
         setValue={setValue} 
-        register={register} 
+        register={register}
       />
 
       <Button type="submit">Продолжить</Button>

@@ -22,6 +22,6 @@ const registerSchema = z.object({
     viewName: z.string().startsWith("@", "Отображаемое имя должно начинаться с @"),
 });
 
-export { registerSchema };
+export { regExpForPass, registerSchema };
 export type { IRegisterFormModel };
 

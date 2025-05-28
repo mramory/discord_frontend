@@ -15,6 +15,14 @@ const NotoSans = Noto_Sans({
 export const metadata: Metadata = {
   title: 'Discord App',
   description: 'Discord app',
+  icons: {
+    icon: [
+      {
+        url: '/favicon.ico',
+        sizes: 'any',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({

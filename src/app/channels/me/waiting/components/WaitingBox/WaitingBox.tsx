@@ -1,14 +1,12 @@
 "use client";
 
-import { Avatar } from "@/components/Avatar/Avatar";
-import s from "@/app/channels/components/Conversation/Conversation.module.scss";
-import { AiFillDislike } from "react-icons/ai";
-import { AiFillLike } from "react-icons/ai";
-import clsx from "clsx";
-import { UserType } from "@/types/User";
 import { friendsApiService } from "@/api/friends/friendsApi.service";
+import s from "@/app/channels/components/Conversation/Conversation.module.scss";
+import { Avatar } from "@/components/Avatar/Avatar";
 import { FriendRequestType } from "@/types/Friend";
+import clsx from "clsx";
 import { Dispatch, SetStateAction } from "react";
+import { AiFillDislike, AiFillLike } from "react-icons/ai";
 
 interface WaitingBoxProps {
   id: number;
@@ -28,7 +26,7 @@ export default function WaitingBox({
   };
   const denyFriendRequest = async () => {
     const res = await friendsApiService.denyFriendRequest(id);
-    setWaiting(prev => prev.filter(req => req.requestId !== res.id))
+    setWaiting(prev => prev.filter(req => req.id !== res.id))
   };
 
   return (

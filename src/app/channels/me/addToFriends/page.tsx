@@ -1,16 +1,15 @@
-'use client'
-
-
-import { UserType } from "@/types/User"
-import Search from "./components/Search/Search"
-import s from "./page.module.scss"
-import UserBox from "../../components/UserBox/UserBox"
-import getAllUsers from "@/actions/getAllUsers"
-import UsersList from "./components/UsersList/UsersList"
+import { cookies } from "next/headers";
+import Search from "./components/Search/Search";
+import UsersList from "./components/UsersList/UsersList";
+import s from "./page.module.scss";
 
 export default async function Page() {
-
-    const users = await getAllUsers()
+    const users = await fetch('http://localhost:9200/user/getAll', {
+        credentials: 'include',
+        headers: {
+          'Authorization': `Bearer ${cookies().get('AccessToken')?.value}`
+        }
+      }).then(res => res.json());
 
     return(
         <div className={s.container}>

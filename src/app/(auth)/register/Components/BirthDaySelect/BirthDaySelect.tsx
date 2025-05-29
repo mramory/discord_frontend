@@ -1,15 +1,15 @@
+import Select from "@/components/Select/Select"
 import { UseFormRegister, UseFormSetValue } from "react-hook-form"
 import { IRegisterFormModel } from "../../RegisterForm/RegisterFormModel"
 import s from "./BirthDaySelect.module.scss"
-import Select from "@/components/Select/Select"
 
 const DAYS_IN_MONTH = 31
 const CURRENT_YEAR = 2025
 const YEARS_RANGE = 24
 
-const days = Array.from({ length: DAYS_IN_MONTH }, (_, i) => i + 1)
+const days = Array.from({ length: DAYS_IN_MONTH }, (_, i) => i + 1).map(day => day.toString())
 const month = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"]
-const years = Array.from({ length: YEARS_RANGE }, (_, i) => CURRENT_YEAR - i)
+const years = Array.from({ length: YEARS_RANGE }, (_, i) => CURRENT_YEAR - i).map(year => year.toString())
 
 interface BirthDaySelectProps {
     register: UseFormRegister<IRegisterFormModel>,

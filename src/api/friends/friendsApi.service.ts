@@ -13,8 +13,8 @@ export const friendsApiService = {
         .then(res => res.data)
     },
 
-    async getFriendRequests(currentUserId: number) {
-        return instance.get(`friends/req?currentUserId=${currentUserId}`)
+    async getFriendRequests() {
+        return instance.get(`friends/req`)
         .then(res => res.data)
         .catch(err => null)
     },

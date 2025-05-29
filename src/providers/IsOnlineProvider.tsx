@@ -15,10 +15,6 @@ export default function IsOnlineProvider({children}: {children: React.ReactNode}
             socket.emit("new_online_user", currentUserId);
         }
 
-        if(!currentUserId){
-            socket.emit("new_offline_user", currentUserId);
-        }
-
         socket.on("connect", () => {
             if(currentUserId){
                 socket.emit("new_online_user", currentUserId);

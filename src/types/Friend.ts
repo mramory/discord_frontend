@@ -1,7 +1,7 @@
 import { UserType } from "./User"
 
 export type FriendRequestType = {
-    requestId: number,
+    id: number,
     senderUserId: number,
     senderUser: UserType,
     recipientUser: UserType,

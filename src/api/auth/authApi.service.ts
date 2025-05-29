@@ -1,7 +1,6 @@
 import { RestoreArgs } from "@/app/restore_pass/page";
-import { UserType } from "@/types/User";
 import { instance } from "..";
-import { LoginArgs } from "./types";
+import { LoginArgs, RegisterArgs } from "./types";
 
 
 export const AuthApiService = {
@@ -15,7 +14,7 @@ export const AuthApiService = {
             return res.data
         })
     },
-    async register(data: Omit<UserType, "id" | "createdAt" | "img">) {
+    async register(data: RegisterArgs) {
         return instance.post("auth/register", { ...data })
         .then(res => {
             instance.defaults.headers.common[

@@ -1,10 +1,9 @@
 import { AuthApiService } from "@/api/auth/authApi.service";
-import { LoginArgs } from "@/api/auth/types";
+import { LoginArgs, RegisterArgs } from "@/api/auth/types";
 import { IRegisterFormModel } from "@/app/(auth)/register/RegisterForm/RegisterFormModel";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import socket from "@/libs/socket.io";
 import { clearUserData, setUserData } from "@/Redux/Slices/authSlice";
-import { returnRegisterData } from "@/utils/returnRegisterData";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
@@ -41,9 +40,9 @@ const useLoginService = () => {
 const useRegisterService = () => {
     const dispatch = useAppDispatch()
 
-    const register = async (data: IRegisterFormModel) => {
+    const register = async (data: RegisterArgs) => {
       try {
-        const response = await AuthApiService.register(returnRegisterData(data))
+        const response = await AuthApiService.register(data)
 
         if(response.accessToken) {
             dispatch(setUserData(response))

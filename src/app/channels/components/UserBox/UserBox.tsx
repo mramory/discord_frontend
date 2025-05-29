@@ -1,13 +1,13 @@
 'use client'
 
-import clsx from "clsx";
-import { MouseEvent, useMemo } from "react";
-import toast from "react-hot-toast";
-import s from "../Conversation/Conversation.module.scss";
 import { friendsApiService } from "@/api/friends/friendsApi.service";
 import { Avatar } from "@/components/Avatar/Avatar";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { UserType } from "@/types/User";
+import clsx from "clsx";
+import { MouseEvent, useMemo } from "react";
+import toast from "react-hot-toast";
+import s from "../Conversation/Conversation.module.scss";
 
 interface UserBoxProps {
   user: UserType;

@@ -5,9 +5,24 @@ interface IRegisterFormModel {
   password: string;
   name: string;
   viewName: string;
-  day: number;
+  day: string;
   month: string;
-  year: number;
+  year: string;
+}
+
+const MONTH_TO_NUMBER: Record<string, number> = {
+    "январь": 1,
+    "февраль": 2,
+    "март": 3,
+    "апрель": 4,
+    "май": 5,
+    "июнь": 6,
+    "июль": 7,
+    "август": 8,
+    "сентябрь": 9,
+    "октябрь": 10,
+    "ноябрь": 11,
+    "декабрь": 12,
 }
 
 const regExpForPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gm
@@ -20,8 +35,11 @@ const registerSchema = z.object({
     ),
     name: z.string().min(1, "Поле обязательно"),
     viewName: z.string().startsWith("@", "Отображаемое имя должно начинаться с @"),
+    day: z.string(),
+    month: z.string(),
+    year: z.string(),
 });
 
-export { regExpForPass, registerSchema };
+export { MONTH_TO_NUMBER, regExpForPass, registerSchema };
 export type { IRegisterFormModel };
 

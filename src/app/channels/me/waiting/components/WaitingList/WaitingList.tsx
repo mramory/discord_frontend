@@ -1,10 +1,9 @@
 'use client'
 
-import s from "./WaitingList.module.scss"
-import { useEffect, useState } from "react"
 import { useTypedSelector } from "@/hooks/useTypedSelector"
 import { pusherClient } from "@/libs/pusher"
 import { FriendRequestType } from "@/types/Friend"
+import { useEffect, useState } from "react"
 import WaitingBox from "../WaitingBox/WaitingBox"
 
 interface WaitingListProps {
@@ -40,7 +39,7 @@ export default function WaitingList({initialData}: WaitingListProps) {
 
     return(
         <div>
-            {waiting?.map((request: FriendRequestType) => <WaitingBox setWaiting={setWaiting} key={request.senderUserId} id={request.requestId} userName={request.senderName} />)}
+            {waiting?.map((request: FriendRequestType) => <WaitingBox setWaiting={setWaiting} key={request.senderUserId} id={request.id} userName={request.senderUser.name} />)}
         </div>
     )
 }

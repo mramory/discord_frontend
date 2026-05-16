@@ -2,10 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import s from "../(auth)/style.module.scss";
 import { AuthApiService } from "@/api/auth/authApi.service";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
+import s from "../(auth)/style.module.scss";
 
 export type RestoreArgs = {
     pass: string,
@@ -13,7 +13,7 @@ export type RestoreArgs = {
 }
 
 const Page = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<RestoreArgs>();
+    const { register, handleSubmit } = useForm<RestoreArgs>();
 
     const { push } = useRouter()
 

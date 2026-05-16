@@ -3,11 +3,11 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { regExpForPass } from "../(auth)/register/RegisterForm/RegisterFormModel";
-import s from "../(auth)/style.module.scss";
 import { AuthApiService } from "@/api/auth/authApi.service";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
+import { regExpForPass } from "../(auth)/register/RegisterForm/RegisterFormModel";
+import s from "../(auth)/style.module.scss";
 
 export type RestoreArgs = {
     pass: string,
@@ -16,7 +16,7 @@ export type RestoreArgs = {
 }
 
 const Page = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<RestoreArgs>();
+    const { register, handleSubmit } = useForm<RestoreArgs>();
 
     const { push } = useRouter()
 
@@ -30,8 +30,12 @@ const Page = () => {
                             включать хотя бы один специальный символ: #, ?, !.`)
                             return
                         }
-        //@ts-ignore
-        const response = await AuthApiService.restorePass({ email: query.get("email"), pass: data.pass, code: data.code })
+        const email = query.get("email")
+        if (!email) {
+            toast.error("Email не найден в URL")
+            return
+        }
+        const response = await AuthApiService.restorePass({ email, pass: data.pass, code: data.code })
         console.log(response)
         if(!response) {
             toast.error("Неправильный код")

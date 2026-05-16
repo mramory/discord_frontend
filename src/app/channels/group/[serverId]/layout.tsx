@@ -10,6 +10,7 @@ export default function SereverLayout({
   return (
     <>
       <ChannelsSidebar serverId={params.serverId} />
+
       {children}
     </>
   );

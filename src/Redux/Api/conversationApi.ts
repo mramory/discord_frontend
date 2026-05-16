@@ -1,22 +1,22 @@
-import { instance } from '@/api'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { instance } from '@/api'
 
 export const conversationApi = createApi({
   reducerPath: 'conversationApi',
   baseQuery: fetchBaseQuery({ baseUrl: instance.defaults.baseURL }),
   tagTypes: ["Conversation"],
   endpoints: (builder) => ({
-    getConversations: builder.query<any, void>({
+    getConversations: builder.query<unknown, void>({
       query: () => `/conversation`,
-      providesTags: ['Conversation']
+      providesTags: ['Conversation'],
     }),
     deleteConversation: builder.mutation({
         query: (id) => ({
             method: "DELETE",
             url: `conversation/${id}`,
         }),
-        invalidatesTags: ['Conversation']
-    })
+        invalidatesTags: ['Conversation'],
+    }),
   }),
 })
 

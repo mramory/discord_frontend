@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import { useCallback, useContext } from "react";
 import { Avatar } from "@/components/Avatar/Avatar";
 import Tag from "@/components/Tag/Tag";
 import { SettingsContext } from "@/context/SettingsContext";
@@ -7,8 +9,6 @@ import { AlignEnum } from "@/contstants";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { toggleMuted, toggleSilent } from "@/Redux/Slices/mediaSlice";
-import Image from "next/image";
-import { useCallback, useContext } from "react";
 import s from "./CurrentUserBox.module.scss";
 
 

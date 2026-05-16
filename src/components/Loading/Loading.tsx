@@ -1,5 +1,5 @@
-import s from "./Loading.module.scss";
 import Image from "next/image";
+import s from "./Loading.module.scss";
 
 export const Loading = () => {
   return (

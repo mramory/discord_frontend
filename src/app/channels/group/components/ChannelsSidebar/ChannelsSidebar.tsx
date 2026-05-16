@@ -1,19 +1,19 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import s from "../../../components/MySidebar/MySidebar.module.scss";
 import { useEffect, useState } from "react";
-import { ServerApiService } from "@/api/server/serverApi.service";
-import { ContentType, ConversationType } from "@/types/Conversation";
-import { Conversation } from "@/app/channels/components/Conversation/Conversation";
-import { ServerType } from "@/types/Server";
-import AddChannel from "../AddChannel/AddChannel";
-import { pusherClient } from "@/libs/pusher";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
 import toast from "react-hot-toast";
+import { ServerApiService } from "@/api/server/serverApi.service";
+import { Conversation } from "@/app/channels/components/Conversation/Conversation";
+import { CurrentUserBox } from "@/app/channels/components/MySidebar/CurrentUserBox/CurrentUserBox";
 import Tag from "@/components/Tag/Tag";
 import { AlignEnum } from "@/contstants";
-import { CurrentUserBox } from "@/app/channels/components/MySidebar/CurrentUserBox/CurrentUserBox";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { pusherClient } from "@/libs/pusher";
+import { ContentType, ConversationType } from "@/types/Conversation";
+import { ServerType } from "@/types/Server";
+import s from "../../../components/MySidebar/MySidebar.module.scss";
+import AddChannel from "../AddChannel/AddChannel";
 
 interface ChannelsSidebarProps {
   serverId: string;
@@ -62,8 +62,10 @@ export default function ChannelsSidebar({ serverId }: ChannelsSidebarProps) {
           <div className={s.name}>
             <h3>Сервер {server[0]?.name}</h3>
           </div>
+
           <div className={s.header}>
             <span style={{ fontWeight: "500" }}>ТЕКСТОВЫЕ КАНАЛЫ</span>
+
             <Tag align={AlignEnum.TOP} text="Создать канал">
               <span
                 style={{
@@ -78,6 +80,7 @@ export default function ChannelsSidebar({ serverId }: ChannelsSidebarProps) {
               </span>
             </Tag>
           </div>
+
           {channels?.map((channel: ConversationType) => {
             if (channel.contentType === ContentType.TEXT) {
               return (
@@ -89,8 +92,10 @@ export default function ChannelsSidebar({ serverId }: ChannelsSidebarProps) {
               );
             }
           })}
+
           <div className={s.header}>
             <span style={{ fontWeight: "500" }}>ГОЛОСОВЫЕ КАНАЛЫ</span>
+
             <Tag align={AlignEnum.TOP} text="Создать канал">
               <span
                 style={{
@@ -105,6 +110,7 @@ export default function ChannelsSidebar({ serverId }: ChannelsSidebarProps) {
               </span>
             </Tag>
           </div>
+
           {channels?.map((channel: ConversationType) => {
             if (channel.contentType === ContentType.VIDEO) {
               return (
@@ -116,10 +122,12 @@ export default function ChannelsSidebar({ serverId }: ChannelsSidebarProps) {
               );
             }
           })}
+
           <p>Invite Link:</p>
+
           <span
             style={{ cursor: "pointer" }}
-            onClick={(e) => {
+            onClick={() => {
               toast("Copied", { position: "bottom-left" });
               navigator.clipboard.writeText(
                 process.env.NEXT_PUBLIC_BASE_URL + "/invite/" + data?.inviteCode
@@ -129,11 +137,13 @@ export default function ChannelsSidebar({ serverId }: ChannelsSidebarProps) {
             {process.env.NEXT_PUBLIC_BASE_URL + "/invite/" + data?.inviteCode}
           </span>
         </div>
+
         <AddChannel
           serverId={serverId}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
+
         <CurrentUserBox />
       </div>
     );

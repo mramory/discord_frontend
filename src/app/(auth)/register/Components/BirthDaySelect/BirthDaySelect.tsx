@@ -1,5 +1,5 @@
-import Select from "@/components/Select/Select"
 import { UseFormRegister, UseFormSetValue } from "react-hook-form"
+import Select from "@/components/Select/Select"
 import { IRegisterFormModel } from "../../RegisterForm/RegisterFormModel"
 import s from "./BirthDaySelect.module.scss"
 

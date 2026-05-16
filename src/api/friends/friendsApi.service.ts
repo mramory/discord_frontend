@@ -5,18 +5,18 @@ export const friendsApiService = {
     async getAllFriends() {
         return instance.get(`friends`)
         .then(res => res.data)
-        .catch(err => null) // Implement Normal Error Handler !!!
+        .catch(() => null) // Implement Normal Error Handler !!!
     },
 
     async sendRequest(id: number, myId: number) {
-        return instance.post(`friends/${id}`, {myId})
+        return instance.post(`friends/${id}`, { myId })
         .then(res => res.data)
     },
 
     async getFriendRequests() {
         return instance.get(`friends/req`)
         .then(res => res.data)
-        .catch(err => null)
+        .catch(() => null)
     },
     
     async acceptFriendRequest(requestId: number) {

@@ -1,7 +1,7 @@
-import { useRegisterService } from "@/services/AuthService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useRegisterService } from "@/services/AuthService";
 import { IRegisterFormModel, MONTH_TO_NUMBER, registerSchema } from "./RegisterFormModel";
 
 const useRegisterForm = () => {

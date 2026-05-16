@@ -48,7 +48,7 @@ export const AuthApiService = {
     async checkIsAuth() {
         return instance.get("auth/isAuth")
         .then(res => res.data)
-        .catch(err => null)
+        .catch(() => null)
     },
     async test() {
         return instance.get("auth/test")
@@ -57,16 +57,16 @@ export const AuthApiService = {
     async restorePass(data: RestoreArgs) {
         return instance.post("auth/restorePass", { ...data })
         .then(res => res.data)
-        .catch(err => null)
+        .catch(() => null)
     },
     async sendEmail(data: RestoreArgs) {
         return instance.post("auth/sendEmail", { ...data })
         .then(res => res.data)
-        .catch(err => null)
+        .catch(() => null)
     },
     async loadUsersJson(filePath: string) {
         return instance.post("auth/loadUsersJson", { filePath })
         .then(res => res.data)
-        .catch(err => null)
+        .catch(() => null)
     },
 }

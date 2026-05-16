@@ -1,5 +1,5 @@
-import { useTypedSelector } from "./useTypedSelector";
 import { ConversationType } from "@/types/Conversation";
+import { useTypedSelector } from "./useTypedSelector";
 
 
 export const useOtherUser = (data: ConversationType) => {

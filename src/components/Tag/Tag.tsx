@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import { AlignEnum } from "@/contstants";
 import s from "./Tag.module.scss";
-import clsx from "clsx";
 
 interface TagProps {
   text: string;
@@ -18,8 +18,10 @@ export default function Tag({ text, align, children }: TagProps) {
         )}
       >
         <div className={s.triangle}></div>
+
         <span>{text}</span>
       </div>
+
       {children}
     </div>
   );

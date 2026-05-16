@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { HTTP_STATUS } from "@/constants/http";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -28,8 +29,8 @@ const requestInstance = async <T>(endpoint: string, options: RequestOptions = {}
       headers,
       credentials: 'include',
     });
-    console.log({response});
-    if (response.status === 401 && !_retry) {
+    console.log({ response });
+    if (response.status === HTTP_STATUS.UNAUTHORIZED && !_retry) {
       try {
         const refreshResponse = await requestInstance('/auth/refresh');
         
@@ -40,16 +41,16 @@ const requestInstance = async <T>(endpoint: string, options: RequestOptions = {}
             headers,
           });
         } else {
-            console.log({refreshResponse})
+            console.log({ refreshResponse })
           redirect('/login');
         }
       } catch (refreshError) {
-        console.log({refreshError})
+        console.log({ refreshError })
         redirect('/login');
       }
     }
 
-    if (response.status === 406) {
+    if (response.status === HTTP_STATUS.NOT_ACCEPTABLE) {
       redirect('/login');
     }
 

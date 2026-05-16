@@ -6,7 +6,7 @@ export const ConversationApiService = {
     async getAllConversations() {
         return instance.get(`conversation`)
         .then(res => res.data)
-        .catch(err => null)
+        .catch(() => null)
     },
 
     async getConversation(id: string | number) {
@@ -18,11 +18,11 @@ export const ConversationApiService = {
     async createConversation(userid: string | number) {
         return instance.post(`conversation/${userid}`)
         .then(res => res.data)
-        .catch(err => null)
+        .catch(() => null)
     },
     
     async deleteConversation(id: string | number) {
         return instance.delete(`conversation/${id}`)
         .then(res => res.data)
-    }
+    },
 }

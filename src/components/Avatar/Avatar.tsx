@@ -2,6 +2,8 @@ import clsx from "clsx";
 import Image from "next/image";
 import s from "./Avatar.module.scss";
 
+const DEFAULT_AVATAR_SIZE = 48;
+
 interface AvatarProps {
   text?: string;
   img?: string;
@@ -22,10 +24,10 @@ export const Avatar = ({
   children,
   text,
   img,
-  width = 48,
-  height = 48,
-  contWidth = 48,
-  contHeight = 48,
+  width = DEFAULT_AVATAR_SIZE,
+  height = DEFAULT_AVATAR_SIZE,
+  contWidth = DEFAULT_AVATAR_SIZE,
+  contHeight = DEFAULT_AVATAR_SIZE,
   changeable = false,
   changeableGreen = false,
   round,

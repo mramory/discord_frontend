@@ -14,8 +14,10 @@ export default function Search() {
           fontSize: "12px",
           padding: "8px 10px",
         }}
-        children={"Отправить запрос дружбы"}
-      />
+      >
+        Отправить запрос дружбы
+      </Button>
+
       <input className={s.input} placeholder="Вы можете добавить друзей по имени пользователя" />
     </div>
   );

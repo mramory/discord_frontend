@@ -1,17 +1,17 @@
 "use client";
 
-import { Avatar } from "@/components/Avatar/Avatar";
-import s from "./Conversation.module.scss";
-import { useParams, useRouter } from "next/navigation";
-import { ConversationApiService } from "@/api/conversation/conversationApi.service";
-import { ContentType, ConversationType, Type } from "@/types/Conversation";
-import { useOtherUser } from "@/hooks/useOtherUser";
-import { RxCross2 } from "react-icons/rx";
-import { MouseEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import clsx from "clsx";
+import { useParams, useRouter } from "next/navigation";
+import { MouseEvent } from "react";
+import { RxCross2 } from "react-icons/rx";
+import { ConversationApiService } from "@/api/conversation/conversationApi.service";
+import { Avatar } from "@/components/Avatar/Avatar";
+import { useOtherUser } from "@/hooks/useOtherUser";
+import { ContentType, ConversationType } from "@/types/Conversation";
+import s from "./Conversation.module.scss";
 
 interface ConversationProps {
   data: ConversationType;
@@ -21,7 +21,8 @@ interface ConversationProps {
 export const Conversation = ({ data, serverId }: ConversationProps) => {
   console.log(data)
   const { push } = useRouter();
-  const {conversationId: URLconversationId} = useParams()
+  const { conversationId: URLconversationId } = useParams()
+  const otherUser = useOtherUser(data);
 
   const { mutate } = useMutation({
     mutationFn: (id: number) => ConversationApiService.deleteConversation(id),
@@ -48,7 +49,9 @@ export const Conversation = ({ data, serverId }: ConversationProps) => {
       >
         <div className={clsx(s.container, +URLconversationId === data.id && s.active)}>
           <Image width={20} height={20} alt="()" src={data.contentType === ContentType.TEXT ? "/textChannel.svg" : "/voiceChannel.svg"} />
+
           <span>{data.name}</span>
+
           <button onClick={(e) => onDeleteConversation(data.id, e)}>
             <RxCross2 />
           </button>
@@ -56,7 +59,6 @@ export const Conversation = ({ data, serverId }: ConversationProps) => {
       </Link>
     );
   }
-  const otherUser = useOtherUser(data);
 
   return (
     <Link href={`/channels/${data.id}`}>
@@ -69,7 +71,9 @@ export const Conversation = ({ data, serverId }: ConversationProps) => {
           contWidth={32}
           img="/pirat.jpg"
         />
+
         <span>{otherUser?.name}</span>
+
         <button onClick={(e) => onDeleteConversation(data.id, e)}>
           <RxCross2 />{" "}
         </button>

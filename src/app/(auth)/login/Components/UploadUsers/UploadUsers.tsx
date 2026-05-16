@@ -1,8 +1,8 @@
 "use client"
 
-import { useUploadUsers } from "./UseUploadUsers";
 import Button from "@/components/Button/Button";
 import { AdminRoleGuard } from "@/guards/RoleGuard";
+import { useUploadUsers } from "./UseUploadUsers";
 
 const UploadUsers = () => {
     const { handleFileChange, handleUpload } = useUploadUsers();

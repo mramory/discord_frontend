@@ -1,0 +1,5 @@
+export const HTTP_STATUS = {
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_ACCEPTABLE: 406,
+} as const;

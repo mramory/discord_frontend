@@ -1,14 +1,14 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import { ConversationApiService } from "@/api/conversation/conversationApi.service";
 import { MySidebar } from "../components/MySidebar/MySidebar";
 import { UserInfoSidebar } from "./components/UserInfoSidebar/UserInfoSidebar";
-import { ConversationApiService } from "@/api/conversation/conversationApi.service";
 
   
-  export default async function MainLayout({
+  export default function MainLayout({
     children,
-    params, 
+    params,
   }: {
     children: React.ReactNode;
     params: { conversation: string }

@@ -1,28 +1,28 @@
-import { setOnlineUsers } from "@/Redux/Slices/onlineUsersSlice"
+import { useEffect } from "react"
 import { useAppDispatch } from "@/hooks/useAppDispatch"
 import { useTypedSelector } from "@/hooks/useTypedSelector"
 import socket from "@/libs/socket.io"
-import { useEffect } from "react"
+import { setOnlineUsers } from "@/Redux/Slices/onlineUsersSlice"
 
-export default function IsOnlineProvider({children}: {children: React.ReactNode}) {
+export default function IsOnlineProvider({ children }: {children: React.ReactNode}) {
 
     const currentUserId = useTypedSelector(state => state.auth.id)
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if(currentUserId){
+        if(currentUserId) {
             socket.emit("new_online_user", currentUserId);
         }
 
         socket.on("connect", () => {
-            if(currentUserId){
+            if(currentUserId) {
                 socket.emit("new_online_user", currentUserId);
             }
         })
 
         socket.on("disconnect", () => {
-            if(currentUserId){
+            if(currentUserId) {
                 socket.emit("new_offline_user", currentUserId);
             }
         })
@@ -31,8 +31,8 @@ export default function IsOnlineProvider({children}: {children: React.ReactNode}
             dispatch(setOnlineUsers(usersId))
         })
 
-        window.addEventListener("beforeunload", function (e) {
-            if(currentUserId){
+        window.addEventListener("beforeunload", function () {
+            if(currentUserId) {
                 socket.emit("new_offline_user", currentUserId);
             }
         })
@@ -41,8 +41,8 @@ export default function IsOnlineProvider({children}: {children: React.ReactNode}
             socket.off("get_online_users")
             socket.off("disconnect")
             socket.off("connect")
-            window.removeEventListener("beforeunload", function (e) {
-                if(currentUserId){
+            window.removeEventListener("beforeunload", function () {
+                if(currentUserId) {
                     socket.emit("new_offline_user", currentUserId);
                 }
             })
@@ -50,6 +50,6 @@ export default function IsOnlineProvider({children}: {children: React.ReactNode}
     }, [currentUserId])
 
     return(
-        <>{children}</>
+      <>{children}</>
     )
 }

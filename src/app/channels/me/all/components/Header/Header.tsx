@@ -7,12 +7,13 @@ interface HeaderProps {
     setSearch: Dispatch<SetStateAction<string>>
 }
 
-const Header = function Header({amount, setSearch}: HeaderProps) {
+const Header = function Header({ amount, setSearch }: HeaderProps) {
     return(
-        <div>
-            <Search setSearch={setSearch} />
-            <p className={s.amount}>ВСЕГО ДРУЗЕЙ - {amount}</p>
-        </div>
+      <div>
+        <Search setSearch={setSearch} />
+
+        <p className={s.amount}>ВСЕГО ДРУЗЕЙ - {amount}</p>
+      </div>
     )
 
 }

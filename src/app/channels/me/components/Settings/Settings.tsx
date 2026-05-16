@@ -1,12 +1,12 @@
 "use client";
 
-import { reducer, SettingsContext, Type } from "@/context/SettingsContext";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
-import { useLogoutService } from "@/services/AuthService";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useContext, useMemo, useReducer } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { reducer, SettingsContext, Type } from "@/context/SettingsContext";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { useLogoutService } from "@/services/AuthService";
 import { ProfileSettings } from "./ProfileSettings/ProfileSettings";
 import s from "./Settings.module.scss";
 import { UserInfoBoard } from "./UserInfoBoard/UserInfoBoard";

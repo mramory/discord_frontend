@@ -1,4 +1,3 @@
-import { RxCross2 } from "react-icons/rx";
 import Modal from "react-modal";
 
 interface ModalProps {
@@ -6,7 +5,7 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAfterClose?: () => void;
-  s?: any;
+  s?: Record<string, string>;
 }
 
 export const CustomModal = ({

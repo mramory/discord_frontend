@@ -5,10 +5,10 @@ import { AllFriendsPage } from "./components/AllFriendsPage/AllFriendsPage";
 export default async function Page() {
     const friends = await requestInstance<UserType[]>('/friends', {
       credentials: 'include',
-      next: {tags: ['friends']}
+      next: { tags: ['friends'] },
     });
 
     return(
-        <AllFriendsPage initFriends={friends} />
+      <AllFriendsPage initFriends={friends} />
     )
 }

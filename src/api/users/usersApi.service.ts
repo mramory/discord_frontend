@@ -11,5 +11,5 @@ export const UsersApiService = {
     async changeUser(dto: {newName: string, img: string}) {
         return instance.put("user/change", dto)
         .then(res => res.data)
-    }
+    },
 }

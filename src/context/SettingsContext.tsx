@@ -1,7 +1,7 @@
 "use client";
 
-import { Settings } from "@/app/channels/me/components/Settings/Settings";
 import { createContext, useCallback, useEffect, useState } from "react";
+import { Settings } from "@/app/channels/me/components/Settings/Settings";
 
 type ContextType = {
     isOpen: boolean
@@ -32,7 +32,7 @@ function reducer(state: StateType, action: ActionType) {
     switch (action.type) {
         case "CHANGE_PAGE": {
             return {
-                page: action.payload
+                page: action.payload,
             }
         }
         default:
@@ -40,7 +40,7 @@ function reducer(state: StateType, action: ActionType) {
     }
 }
 
-function SettingsContextComponent({children}: {children: React.ReactNode}) {
+function SettingsContextComponent({ children }: {children: React.ReactNode}) {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const open = useCallback(() => {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { HTTP_STATUS } from "@/constants/http";
 import { AuthApiService } from "./auth/authApi.service";
 
 const instance = axios.create({
@@ -12,7 +13,7 @@ instance.interceptors.response.use(
     },
     async function (error) {
         const originalRequest = error.config;
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        if (error.response?.status === HTTP_STATUS.UNAUTHORIZED && !originalRequest._retry) {
             originalRequest._retry = true;
 
             const response = await AuthApiService.refreshToken()
@@ -23,7 +24,7 @@ instance.interceptors.response.use(
             return instance(originalRequest);
         }
 
-        if (error.response?.status === 406) {
+        if (error.response?.status === HTTP_STATUS.NOT_ACCEPTABLE) {
             instance.defaults.headers.common["Authorization"] = ""
         }
 

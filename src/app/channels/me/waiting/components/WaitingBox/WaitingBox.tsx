@@ -1,12 +1,12 @@
 "use client";
 
+import clsx from "clsx";
+import { Dispatch, SetStateAction } from "react";
+import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { friendsApiService } from "@/api/friends/friendsApi.service";
 import s from "@/app/channels/components/Conversation/Conversation.module.scss";
 import { Avatar } from "@/components/Avatar/Avatar";
 import { FriendRequestType } from "@/types/Friend";
-import clsx from "clsx";
-import { Dispatch, SetStateAction } from "react";
-import { AiFillDislike, AiFillLike } from "react-icons/ai";
 
 interface WaitingBoxProps {
   id: number;
@@ -40,17 +40,20 @@ export default function WaitingBox({
           contWidth={32}
           img="/pirat.jpg"
         />
+
         <span>{userName}</span>
       </div>
+
       <div>
         <span
-          onClick={(e) => acceptFriendRequest()}
+          onClick={() => acceptFriendRequest()}
           style={{ fontSize: "24px", cursor: "pointer", marginRight: "20px" }}
         >
           <AiFillLike />
         </span>
+
         <span
-          onClick={(e) => denyFriendRequest()}
+          onClick={() => denyFriendRequest()}
           style={{ fontSize: "24px", cursor: "pointer" }}
         >
           <AiFillDislike />

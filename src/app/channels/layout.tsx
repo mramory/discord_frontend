@@ -1,5 +1,5 @@
-import { IWithChildren } from "@/types/App/UtilTypes";
 import { Metadata } from "next";
+import { IWithChildren } from "@/types/App/UtilTypes";
 import { ConstantSidebar } from "./components/ConstantSidebar/ConstantSidebar";
 
 export const metadata: Metadata = {
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Main",
 };
 
-export default function MainLayout({children}: IWithChildren) { 
+export default function MainLayout({ children }: IWithChildren) { 
   return (
     <main style={{ widows: "100vw", height: "100vh", display: "flex", overflow: "hidden" }}>
       <ConstantSidebar />

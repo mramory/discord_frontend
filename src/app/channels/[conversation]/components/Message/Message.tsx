@@ -1,13 +1,13 @@
-import { Avatar } from "@/components/Avatar/Avatar";
-import s from "./Message.module.scss";
-import { MessageType } from "@/types/Message";
 import { format } from "date-fns";
 import Image from "next/image";
-import ImageModal from "@/components/ImageModal/ImageModal";
 import { Dispatch, SetStateAction, useState } from "react";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { MessagesApiService } from "@/api/messages/messagesApi.service";
+import { Avatar } from "@/components/Avatar/Avatar";
 import Button from "@/components/Button/Button";
+import ImageModal from "@/components/ImageModal/ImageModal";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { MessageType } from "@/types/Message";
+import s from "./Message.module.scss";
 
 interface MessageProps {
   message: MessageType;
@@ -70,11 +70,14 @@ const FirstMessage = ({
           img={message.sender.img}
         />
       </div>
+
       <div>
         <div className={s.meta}>
           <span>{message.sender.name}</span>
+
           <span>{format(createdAt, "dd.M.y H:mm")}</span>
         </div>
+
         {message.image ? (
           <>
             <ImageModal
@@ -82,6 +85,7 @@ const FirstMessage = ({
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
             />
+
             <div
               onClick={() => setIsModalOpen(true)}
               style={{ overflow: "hidden" }}
@@ -98,6 +102,7 @@ const FirstMessage = ({
         ) : (
           <div className={s.text}>{message.text}</div>
         )}
+
         {role === "ADMIN" ? <Button className={s.delete} onClick={() => onDelete(message.id)}>delete</Button> : null}
       </div>
     </div>
@@ -117,6 +122,7 @@ const NotFirstMessage = ({
       <div className={s.timeStamp}>
         <span>{format(createdAt, "H:mm")}</span>
       </div>
+
       {message.image ? (
         <>
           <ImageModal
@@ -124,6 +130,7 @@ const NotFirstMessage = ({
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
           />
+
           <div
             onClick={() => setIsModalOpen(true)}
             style={{ overflow: "hidden" }}
@@ -140,6 +147,7 @@ const NotFirstMessage = ({
       ) : (
         <div className={s.text}>{message.text}</div>
       )}
+
       {role === "ADMIN" ? <Button className={s.delete} onClick={() => onDelete(message.id)}>delete</Button> : null}
     </div>
   );

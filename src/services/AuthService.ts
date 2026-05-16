@@ -1,11 +1,10 @@
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 import { AuthApiService } from "@/api/auth/authApi.service";
 import { LoginArgs, RegisterArgs } from "@/api/auth/types";
-import { IRegisterFormModel } from "@/app/(auth)/register/RegisterForm/RegisterFormModel";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import socket from "@/libs/socket.io";
 import { clearUserData, setUserData } from "@/Redux/Slices/authSlice";
-import { AxiosError } from "axios";
-import toast from "react-hot-toast";
 
 const useLoginService = () => {
   const dispatch = useAppDispatch();
@@ -71,7 +70,7 @@ const useLogoutService = () => {
 
     const logout = async () => {
         try {
-            const {userId} = await AuthApiService.logout();
+            const { userId } = await AuthApiService.logout();
 
             socket.emit("new_offline_user", userId);
 

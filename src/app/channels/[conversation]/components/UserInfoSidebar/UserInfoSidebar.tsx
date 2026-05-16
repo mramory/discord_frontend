@@ -3,10 +3,10 @@ import clsx from "clsx";
 import { format } from "date-fns";
 import { useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
-import s from "./UserInfoSidebar.module.scss";
 import { Avatar } from "@/components/Avatar/Avatar";
 import { useOtherUser } from "@/hooks/useOtherUser";
 import { ConversationType } from "@/types/Conversation";
+import s from "./UserInfoSidebar.module.scss";
 
 interface UserInfoSidebarProps {
   conversation: ConversationType;

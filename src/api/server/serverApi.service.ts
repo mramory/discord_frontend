@@ -1,5 +1,5 @@
 import { instance } from ".."
-import {CreateChannelDto} from "./types"
+import { CreateChannelDto } from "./types"
 
 
 export const ServerApiService = {
@@ -15,7 +15,7 @@ export const ServerApiService = {
     },
 
     async createServer(name: string, img: string = "", userId: number) {
-        return instance.post("/server", {name, img, userId})
+        return instance.post("/server", { name, img, userId })
         .then(res => res.data)
     },
 
@@ -30,7 +30,7 @@ export const ServerApiService = {
     },
 
     async joinVideo(conversationId: string, mediaStream: MediaStream) {
-        return instance.post(`/server/joinVideo/${conversationId}`, {media: mediaStream})
+        return instance.post(`/server/joinVideo/${conversationId}`, { media: mediaStream })
         .then(res => res.data)
-    }
+    },
 }

@@ -1,14 +1,13 @@
-import {useState, useCallback, useRef, useEffect} from 'react';
-import {SetStateAction} from "react"
+import { useState, useCallback, useRef, useEffect, SetStateAction } from 'react';
 
-const useStateWithCallback = (initialState: string[] | SetStateAction<any>) => {
+function useStateWithCallback<T>(initialState: T | SetStateAction<T>) {
   const [state, setState] = useState(initialState);
-  const cbRef = useRef<((arg: string | string[]) => void) | null>(null);
+  const cbRef = useRef<((arg: T | SetStateAction<T>) => void) | null>(null);
 
-  const updateState = useCallback((newState: string[] | SetStateAction<any>, cb: (arg: string | string[]) => void) => {
+  const updateState = useCallback((newState: T | SetStateAction<T>, cb: (arg: T | SetStateAction<T>) => void) => {
     cbRef.current = cb;
 
-    setState((prev: string[]) => typeof newState === 'function' ? newState(prev) : newState);
+    setState((prev) => typeof newState === 'function' ? (newState as (prev: T | SetStateAction<T>) => T)(prev) : newState);
   }, []);
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const useStateWithCallback = (initialState: string[] | SetStateAction<any>) => {
     }
   }, [state]);
 
-  return [state, updateState];
+  return [state, updateState] as const;
 }
 
 export default useStateWithCallback;

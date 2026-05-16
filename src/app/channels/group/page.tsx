@@ -2,6 +2,6 @@
 
 export default function Page() {
     return(
-        <div>group</div>
+      <div>group</div>
     )
 }

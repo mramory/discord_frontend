@@ -12,6 +12,7 @@ export default function UsersList({ users }: UsersListProps) {
       {users.map((user: UserType) => (
         <div key={user.id}>
           <div className={s.line}></div>
+
           <UserBox user={user} />
         </div>
       ))}

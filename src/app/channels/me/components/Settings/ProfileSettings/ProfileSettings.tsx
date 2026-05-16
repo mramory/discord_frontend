@@ -1,21 +1,20 @@
 "use client";
 
-import Input from "@/components/Input/Input";
-import s from "./ProfileSettings.module.scss";
-import { FieldValues, useForm } from "react-hook-form";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
-import Button from "@/components/Button/Button";
-import toast from "react-hot-toast";
 import clsx from "clsx";
+import { FC, useEffect, useMemo, useRef } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { UsersApiService } from "@/api/users/usersApi.service";
+import { Avatar } from "@/components/Avatar/Avatar";
+import Button from "@/components/Button/Button";
+import Input from "@/components/Input/Input";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { setUserData } from "@/Redux/Slices/authSlice";
-import { CldUploadButton } from "next-cloudinary";
-import Image from "next/image";
-import { Avatar } from "@/components/Avatar/Avatar";
-import { shallowCompare } from "@/utils/objCompare";
-import { instance } from "@/api";
 import { fileToBlob } from "@/utils/fileToBlob";
+import { shallowCompare } from "@/utils/objCompare";
+import s from "./ProfileSettings.module.scss";
+
+const MAX_AVATAR_FILE_BYTES = 73000;
 
 type ProfileSettingsType = {
   name: string;
@@ -28,7 +27,6 @@ export const ProfileSettings: FC<ProfileSettingsType> = ({ name, img }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     watch,
     setValue,
     reset,
@@ -66,8 +64,10 @@ export const ProfileSettings: FC<ProfileSettingsType> = ({ name, img }) => {
         (t) => (
           <div className={clsx(s.toast, t.visible ? s.enter : s.leave)}>
             <p>Аккуратнее, вы не сохранили изменения!</p>
+
             <div>
               <Button onClick={resetHandle}>Сброс</Button>
+
               <Button form="profileForm" type="submit">
                 Сохранить изменения
               </Button>
@@ -88,7 +88,7 @@ export const ProfileSettings: FC<ProfileSettingsType> = ({ name, img }) => {
   }, [watchAll]);
 
   const toBase64 = (file: File) => {
-    if(typeof file == "string"){
+    if(typeof file == "string") {
       return file
     }
     return new Promise((resolve, reject) => {
@@ -109,10 +109,10 @@ export const ProfileSettings: FC<ProfileSettingsType> = ({ name, img }) => {
   const onSubmit = async (data: FieldValues) => {
     const  base64 = await toBase64(data.img)
     const response = await UsersApiService.changeUser(
-      {...data, img: base64} as { newName: string, img: string }
+      { ...data, img: base64 } as { newName: string, img: string }
     );
 
-    if(response?.img){
+    if(response?.img) {
       setValue("img", response.img);
     }
     dispatch(setUserData(response));
@@ -120,12 +120,13 @@ export const ProfileSettings: FC<ProfileSettingsType> = ({ name, img }) => {
     submitToastRef.current = null;
   };
 
-  function handleUpload(e: any) {
-    if (e.target.files[0]) {
-      if(e.target.files[0].size > 73000) {
+  function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      if(file.size > MAX_AVATAR_FILE_BYTES) {
         toast.error("File Too Big")
       }
-      else setValue("img", e.target.files[0]);
+      else setValue("img", file);
     }
   }
 
@@ -134,9 +135,12 @@ export const ProfileSettings: FC<ProfileSettingsType> = ({ name, img }) => {
       <div className={s.settings}>
         <form id="profileForm" onSubmit={handleSubmit(onSubmit)}>
           <Input register={register} id="newName" label="ОТОБРАЖАЕМОЕ ИМЯ" />
+
           <div className={s.separator}></div>
+
           <div className={s.avatar}>
             <h4>АВАТАР</h4>
+
             <div>
               <Button style={{ position: "relative" }} type="button">
                 <input
@@ -147,13 +151,16 @@ export const ProfileSettings: FC<ProfileSettingsType> = ({ name, img }) => {
                   id="img"
                   onChange={handleUpload}
                 />
+
                 <span className={s.changeAva}>Смена аватара</span>
               </Button>
+
               <Button type="button">Удалить аватар</Button>
             </div>
           </div>
         </form>
       </div>
+
       <div className={s.preview}>
         <Avatar
           contWidth={90}

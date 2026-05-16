@@ -48,12 +48,11 @@
       "args": "after-used",
       "ignoreRestSiblings": false,
       "argsIgnorePattern": "^_",
-      "varsIgnorePattern": "^_",
-      "ignoreArgsIfMatch": "^_"
+      "varsIgnorePattern": "^_"
     }],
     
-    // Запрет необъявленных переменных
-    "no-undef": "error",
+    // Запрет необъявленных переменных (off: TypeScript уже проверяет это лучше)
+    "no-undef": "off",
     
     // Требование констант для значений, которые не меняются
     "prefer-const": ["error", {

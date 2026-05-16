@@ -2,13 +2,13 @@
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { Conversation } from "../Conversation/Conversation";
-import { CurrentUserBox } from "./CurrentUserBox/CurrentUserBox";
-import s from "./MySidebar.module.scss";
 import { ConversationApiService } from "@/api/conversation/conversationApi.service";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { pusherClient } from "@/libs/pusher";
 import { ConversationType } from "@/types/Conversation";
+import { Conversation } from "../Conversation/Conversation";
+import { CurrentUserBox } from "./CurrentUserBox/CurrentUserBox";
+import s from "./MySidebar.module.scss";
 
 export const MySidebar = () => {
   const queryClient = useQueryClient();

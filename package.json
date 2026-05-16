@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:check": "node scripts/check-lint.js",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,html,css,scss}\""
   },
   "dependencies": {

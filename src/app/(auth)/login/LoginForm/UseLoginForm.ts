@@ -1,8 +1,8 @@
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { ILoginForm } from "./LoginFormModel";
 import { LoginArgs } from "@/api/auth/types";
 import { useLoginService } from "@/services/AuthService";
+import { ILoginForm } from "./LoginFormModel";
 
 const useLoginForm = () => {
     const router = useRouter();

@@ -1,18 +1,18 @@
 "use client";
 
-import { FieldValues, useForm } from "react-hook-form";
-import s from "./CreateGroup.module.scss";
-import GroupSampleBox from "../GroupSampleBox/GroupSampleBox";
-import { RxCross2 } from "react-icons/rx";
-import { useState } from "react";
 import clsx from "clsx";
 import Image from "next/image";
-import Button from "@/components/Button/Button";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { RxCross2 } from "react-icons/rx";
 import { ServerApiService } from "@/api/server/serverApi.service";
+import Button from "@/components/Button/Button";
 import { CustomModal } from "@/components/CustomModal/CustomModal";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { addServer } from "@/Redux/Slices/serverSlice";
+import GroupSampleBox from "../GroupSampleBox/GroupSampleBox";
+import s from "./CreateGroup.module.scss";
 
 interface CreateGroupProps {
   isOpen: boolean;
@@ -27,7 +27,6 @@ export default function CreateGroup({ isOpen, onClose }: CreateGroupProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<FieldValues>();
 
   const [next, setNext] = useState<boolean>(false);
@@ -73,20 +72,26 @@ export default function CreateGroup({ isOpen, onClose }: CreateGroupProps) {
     >
       <div className={clsx(s.container, next && s.next)}>
         <h2>Создайте сервер</h2>
+
         <p>
           Ваш сервер - это местоб где вы можете тусоваться со своими друзьями.
           Создайте сервер и ачните общаться
         </p>
+
         <div onClick={() => setNext(true)}>
           <GroupSampleBox text="Свой шаблон" img="/myGroupSample.svg" />
         </div>
+
         <h4>НАЧНИТЕ С ШАБЛОНА</h4>
+
         <div onClick={() => setNext(true)}>
           <GroupSampleBox text="Игры" img="/gameGroupSample.svg" />
         </div>
+
         <div onClick={() => setNext(true)}>
           <GroupSampleBox text="Школьный клуб" img="/schoolGroupSample.svg" />
         </div>
+
         <div onClick={() => setNext(true)}>
           <GroupSampleBox text="Учебная группа" img="/teachGroupSample.svg" />
         </div>
@@ -105,12 +110,15 @@ export default function CreateGroup({ isOpen, onClose }: CreateGroupProps) {
           <RxCross2 />
         </div>
       </div>
+
       <div className={clsx(s.container, next && s.next)}>
         <h2>Персонализируйте свой сервер</h2>
+
         <p>
           Персонализируйте свой новый сервер, выбрав ему название и значок. Их
           можно будет изменить в любой момент
         </p>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.inputImgContainer}>
             <input
@@ -120,6 +128,7 @@ export default function CreateGroup({ isOpen, onClose }: CreateGroupProps) {
               type="file"
               onChange={handleUploadedFile}
             />
+
             <Image
               width={80}
               height={80}
@@ -127,13 +136,17 @@ export default function CreateGroup({ isOpen, onClose }: CreateGroupProps) {
               src={preview ? preview : "/addImgToGroup.svg"}
             />
           </div>
+
           <h4>НАЗВАНИЕ СЕРВЕРА</h4>
+
           <input
             {...register("name", { required: true })}
             className={s.input}
           />
+
           <div className={s.footer}>
             <span onClick={() => setNext(false)}>Назад</span>
+
             <Button
               type="submit"
               style={{ width: "auto", padding: "10px 25px" }}

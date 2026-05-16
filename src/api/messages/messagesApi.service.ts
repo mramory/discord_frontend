@@ -1,5 +1,5 @@
 import { instance } from ".."
-import {CreateMessageDto} from "./types"
+import { CreateMessageDto } from "./types"
 
 
 export const MessagesApiService = {
@@ -15,12 +15,12 @@ export const MessagesApiService = {
     },
 
     async createMessage(data: CreateMessageDto) {
-        return instance.post(`messages/`, {...data})
+        return instance.post(`messages/`, { ...data })
         .then(res => res.data)
     },
 
     async deleteMessage(id: number) {
         return instance.delete(`messages/${id}`)
         .then(res => res.data)
-    }
+    },
 }

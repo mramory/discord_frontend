@@ -1,11 +1,11 @@
 "use client";
 
+import { CldUploadButton, CldUploadWidgetResults } from "next-cloudinary";
 import { useForm } from "react-hook-form";
-import s from "./MessageInput.module.scss";
+import { AiFillPlusCircle } from "react-icons/ai";
 import { MessagesApiService } from "@/api/messages/messagesApi.service";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
-import { CldUploadButton } from "next-cloudinary";
-import { AiFillPlusCircle } from "react-icons/ai";
+import s from "./MessageInput.module.scss";
 
 interface MessageInputProps {
   conversationId: string;
@@ -21,7 +21,6 @@ export default function MessageInput({ conversationId }: MessageInputProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
   } = useForm<FormValues>();
 
@@ -36,10 +35,11 @@ export default function MessageInput({ conversationId }: MessageInputProps) {
     }
   };
 
-  const handleUpload = async (result: any) => {
-    if (senderId) {
+  const handleUpload = async (result: CldUploadWidgetResults) => {
+    if (senderId && result.info && typeof result.info === "object") {
+        const info = result.info as { secure_url: string };
         await MessagesApiService.createMessage({
-          image: result.info.secure_url,
+          image: info.secure_url,
           senderId,
           conversationId,
         });
@@ -57,6 +57,7 @@ export default function MessageInput({ conversationId }: MessageInputProps) {
       >
         <AiFillPlusCircle size={24} />
       </CldUploadButton>
+
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register("text", { required: true })}

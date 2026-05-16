@@ -1,5 +1,5 @@
-import s from "./style.module.scss";
 import { IWithChildren } from "@/types/App/UtilTypes";
+import s from "./style.module.scss";
 
 const AuthLayout = ({ children }: IWithChildren) => {
   return (

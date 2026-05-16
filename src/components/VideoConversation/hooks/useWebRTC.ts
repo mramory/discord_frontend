@@ -1,8 +1,10 @@
-import { useCallback, useEffect, useRef } from "react";
 import freeice from 'freeice';
+import { useCallback, useEffect, useRef } from "react";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 import socket from "@/libs/socket.io";
 import useStateWithCallback from "./useStateWithCallback";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
+
+const SRC_OBJECT_RETRY_INTERVAL_MS = 1000;
 
 const ACTIONS = {
     JOIN: 'join',
@@ -13,7 +15,7 @@ const ACTIONS = {
     RELAY_SDP: 'relay-sdp',
     RELAY_ICE: 'relay-ice',
     ICE_CANDIDATE: 'ice-candidate',
-    SESSION_DESCRIPTION: 'session-description'
+    SESSION_DESCRIPTION: 'session-description',
 };
 
 type ClientType = {
@@ -59,7 +61,7 @@ export const useLocalStream = (conversationId: string): ReturnValue => {
                 audio: true,
                 video: {
                     width: 720,
-                    height: 400
+                    height: 400,
                 },
             });
             addNewClient({ newClient: LOCAL_VIDEO, img: avatar }, () => {
@@ -121,8 +123,7 @@ export const useLocalStream = (conversationId: string): ReturnValue => {
                     tracksNumber = 0;
                     addNewClient({ newClient: peerID, img }, () => {
                         if (peerMediaElements.current[peerID]) {
-                            //@ts-ignore
-                            peerMediaElements.current[peerID].srcObject = remoteStream;
+                            peerMediaElements.current[peerID]!.srcObject = remoteStream;
                         }
                         else {
                             let settled = false;
@@ -135,7 +136,7 @@ export const useLocalStream = (conversationId: string): ReturnValue => {
                                 if (settled) {
                                     clearInterval(interval);
                                 }
-                            }, 1000);
+                            }, SRC_OBJECT_RETRY_INTERVAL_MS);
                         }
                     })
                 }

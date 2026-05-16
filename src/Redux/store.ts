@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authApi } from "./Api/authApi";
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { authSlice } from "./Slices/authSlice";
+import { authApi } from "./Api/authApi";
 import { conversationApi } from "./Api/conversationApi";
-import { serverSlice } from "./Slices/serverSlice";
-import { onlineUsersSlice } from "./Slices/onlineUsersSlice";
+import { authSlice } from "./Slices/authSlice";
 import { mediaSlice } from "./Slices/mediaSlice";
+import { onlineUsersSlice } from "./Slices/onlineUsersSlice";
+import { serverSlice } from "./Slices/serverSlice";
 
 
 export const store = configureStore({

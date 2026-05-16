@@ -1,16 +1,16 @@
 'use client'
 
+import { useEffect, useState } from "react"
 import { useTypedSelector } from "@/hooks/useTypedSelector"
 import { pusherClient } from "@/libs/pusher"
 import { FriendRequestType } from "@/types/Friend"
-import { useEffect, useState } from "react"
 import WaitingBox from "../WaitingBox/WaitingBox"
 
 interface WaitingListProps {
     initialData: FriendRequestType[]
 }
 
-export default function WaitingList({initialData}: WaitingListProps) {
+export default function WaitingList({ initialData }: WaitingListProps) {
 
     const currentUserId = useTypedSelector(state => state.auth.id)
 
@@ -23,10 +23,10 @@ export default function WaitingList({initialData}: WaitingListProps) {
     useEffect(() => {
         setWaiting(initialData)
     }, [initialData])
-    console.log({waiting})
+    console.log({ waiting })
 
     useEffect(() => {
-        if(currentUserId){
+        if(currentUserId) {
           pusherClient.subscribe(`friend__${currentUserId}`)
           pusherClient.bind("newFriendRequest", newRequestHandler)
         }
@@ -38,8 +38,8 @@ export default function WaitingList({initialData}: WaitingListProps) {
     }, [currentUserId])
 
     return(
-        <div>
-            {waiting?.map((request: FriendRequestType) => <WaitingBox setWaiting={setWaiting} key={request.senderUserId} id={request.id} userName={request.senderUser.name} />)}
-        </div>
+      <div>
+        {waiting?.map((request: FriendRequestType) => <WaitingBox setWaiting={setWaiting} key={request.senderUserId} id={request.id} userName={request.senderUser.name} />)}
+      </div>
     )
 }

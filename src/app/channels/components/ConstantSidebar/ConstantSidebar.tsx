@@ -1,17 +1,17 @@
 "use client";
 
-import { Avatar } from "@/components/Avatar/Avatar";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import s from "./ConstantSidebar.module.scss";
+import { ServerApiService } from "@/api/server/serverApi.service";
+import { Avatar } from "@/components/Avatar/Avatar";
 import Tag from "@/components/Tag/Tag";
 import { AlignEnum } from "@/contstants";
-import CreateGroup from "../../group/components/CreateGroup/CreateGroup";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
-import { ServerApiService } from "@/api/server/serverApi.service";
-import Link from "next/link";
-import { ServerType } from "@/types/Server";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { setServers } from "@/Redux/Slices/serverSlice";
+import { ServerType } from "@/types/Server";
+import CreateGroup from "../../group/components/CreateGroup/CreateGroup";
+import s from "./ConstantSidebar.module.scss";
 
 export const ConstantSidebar = () => {
   const dispatch = useAppDispatch();
@@ -65,6 +65,7 @@ export const ConstantSidebar = () => {
           </Link>
         );
       })}
+
       <Tag align={AlignEnum.RIGHT} text="Добавить сервер">
         <Avatar
           onclick={() => setIsModalOpen(true)}
@@ -86,6 +87,7 @@ export const ConstantSidebar = () => {
           </svg>
         </Avatar>
       </Tag>
+
       <CreateGroup isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );

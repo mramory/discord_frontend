@@ -2,18 +2,18 @@ import { CSSProperties, DetailedHTMLProps, InputHTMLAttributes } from "react"
 import { FieldValues, Path, UseFormRegister } from "react-hook-form"
 import s from "./Input.module.scss"
 
-interface InputProps<T> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+interface InputProps<T extends FieldValues> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     label: string,
     placeholder?: string,
     type?: string,
-    id: Path<T extends FieldValues ? T : any>,
+    id: Path<T>,
     style?: CSSProperties,
     required?: boolean,
-    register: UseFormRegister<T extends FieldValues ? T : any>,
+    register: UseFormRegister<T>,
     error?: string
 }
 
-function Input<T>({ label, placeholder, type, id, style, required, register, error, ...inputProps }: InputProps<T>) {
+function Input<T extends FieldValues>({ label, placeholder, type, id, style, required, register, error, ...inputProps }: InputProps<T>) {
     return(
       <div style={style} className={s.container}>
         <label>{label}{required ? <span className={s.required}> *</span> : null}</label>

@@ -1,10 +1,10 @@
 "use client"
 
+import Button from "@/components/Button/Button";
+import Input from "@/components/Input/Input";
 import BirthDaySelect from "../Components/BirthDaySelect/BirthDaySelect";
 import { IRegisterFormModel } from "./RegisterFormModel";
 import { useRegisterForm } from "./UseRegisterForm";
-import Button from "@/components/Button/Button";
-import Input from "@/components/Input/Input";
 
 const RegisterForm = () => {
   const { onSubmit, register, setValue, errors } = useRegisterForm();

@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { UserType } from "@/types/User";
-import { useEffect, useState } from "react";
 import FriendBox from "../FriendBox/FriendBox";
 import Header from "../Header/Header";
 
@@ -40,7 +40,7 @@ export const AllFriendsPage = ({
 
   useEffect(() => {
     if (search.length > 0) {
-      if(online){
+      if(online) {
         const newFriends = onlineFriends?.filter(
           (friend) => friend.name.indexOf(search) !== -1
         );
@@ -58,6 +58,7 @@ export const AllFriendsPage = ({
   return (
     <div>
       <Header setSearch={setSearch} amount={friends?.length || 0} />
+
       {friends?.map((friend: UserType) => (
         <FriendBox online={onlineFriendsId.includes(friend.id.toString())} key={friend.id} user={friend} />
       ))}

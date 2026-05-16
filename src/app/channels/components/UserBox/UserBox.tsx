@@ -1,12 +1,13 @@
 'use client'
 
-import { friendsApiService } from "@/api/friends/friendsApi.service";
-import { Avatar } from "@/components/Avatar/Avatar";
-import { useTypedSelector } from "@/hooks/useTypedSelector";
-import { UserType } from "@/types/User";
 import clsx from "clsx";
 import { MouseEvent, useMemo } from "react";
 import toast from "react-hot-toast";
+import { friendsApiService } from "@/api/friends/friendsApi.service";
+import { Avatar } from "@/components/Avatar/Avatar";
+import { HTTP_STATUS } from "@/constants/http";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { UserType } from "@/types/User";
 import s from "../Conversation/Conversation.module.scss";
 
 interface UserBoxProps {
@@ -25,7 +26,7 @@ export default function UserBox({ user }: UserBoxProps) {
       friendsApiService.sendRequest(id, currentUserId)
       .then(() => toast.success("Friend Request Send!"))
       .catch(err => {
-        if(err.response.status === 403) toast.error("Already Friends")
+        if(err.response.status === HTTP_STATUS.FORBIDDEN) toast.error("Already Friends")
         else toast.error("Friend Request Already Send")
     })
     }

@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link";
+import Button from "@/components/Button/Button";
+import Input from "@/components/Input/Input";
 import s from "../../style.module.scss";
 import { ILoginForm } from "./LoginFormModel";
 import { useLoginForm } from "./UseLoginForm";
-import Button from "@/components/Button/Button";
-import Input from "@/components/Input/Input";
 
 const LoginForm = () => {
     const { register, onSubmit, errors } = useLoginForm(); 

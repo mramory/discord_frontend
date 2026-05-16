@@ -47,4 +47,4 @@ const ExportToCSV = ({ data }: IParams) => {
     );
   };
 
-  export {ExportToCSV}
+  export { ExportToCSV }

@@ -4,7 +4,7 @@ interface IRegisterFormModel {
   email: string;
   password: string;
   name: string;
-  viewName: string;
+  viewName?: string;
   day: string;
   month: string;
   year: string;
@@ -34,10 +34,16 @@ const registerSchema = z.object({
         "Пароль должен содержать не менее 8 символов, включая хотя бы одно число и включает как строчные, так и прописные буквы и включать хотя бы один специальный символ: #, ?, !."
     ),
     name: z.string().min(1, "Поле обязательно"),
-    viewName: z.string().startsWith("@", "Отображаемое имя должно начинаться с @"),
-    day: z.string(),
-    month: z.string(),
-    year: z.string(),
+    viewName: z
+        .string()
+        .optional()
+        .refine(
+            (v) => !v || v.startsWith("@"),
+            "Отображаемое имя должно начинаться с @",
+        ),
+    day: z.string().min(1, "Укажите день"),
+    month: z.string().min(1, "Укажите месяц"),
+    year: z.string().min(1, "Укажите год"),
 });
 
 export { MONTH_TO_NUMBER, regExpForPass, registerSchema };

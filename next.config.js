@@ -5,6 +5,7 @@ const nextConfig = {
           'res.cloudinary.com',
           'api.cloudinary.com',
           'upload-widget.cloudinary.com',
+          'api.dicebear.com',
         ],
     },
     experimental: {

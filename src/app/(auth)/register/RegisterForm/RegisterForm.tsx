@@ -19,9 +19,10 @@ const RegisterForm = () => {
 
       <Input<IRegisterFormModel> register={register} label="Пароль" required={true} id="password" error={errors.password?.message} />
 
-      <BirthDaySelect 
-        setValue={setValue} 
+      <BirthDaySelect
+        setValue={setValue}
         register={register}
+        errors={errors}
       />
 
       <Button type="submit">Продолжить</Button>

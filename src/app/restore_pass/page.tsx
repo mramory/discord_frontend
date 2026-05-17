@@ -36,7 +36,7 @@ const Page = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Input<RestoreArgs["email"]> register={register} required={true} style={{ marginBottom: "20px" }} label="EMAIL" id="email" placeholder="" />
 
-                <Button type="submit">Получть код</Button>
+                <Button type="submit">Получить код</Button>
               </form>
             </div>
           </div>

@@ -10,10 +10,21 @@ interface RequestOptions extends RequestInit {
 
 const requestInstance = async <T>(endpoint: string, options: RequestOptions = {}): Promise<T> => {
   const { params, _retry, ...fetchOptions } = options;
-  
+
   const headers = new Headers(fetchOptions.headers);
   if (!headers.has('Content-Type')) {
     headers.set('Content-Type', 'application/json');
+  }
+
+  if (typeof window === 'undefined' && !headers.has('cookie')) {
+    const { cookies } = await import('next/headers');
+    const cookieHeader = cookies()
+      .getAll()
+      .map(({ name, value }) => `${name}=${value}`)
+      .join('; ');
+    if (cookieHeader) {
+      headers.set('cookie', cookieHeader);
+    }
   }
 
   const url = new URL(`${BASE_URL}${endpoint}`);

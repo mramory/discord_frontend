@@ -1,17 +1,15 @@
 'use server';
 
-import { cookies } from "next/headers";
+import requestInstance from "@/api/requestInstance";
+import { UserType } from "@/types/User";
 import { AllFriendsPage } from "./all/components/AllFriendsPage/AllFriendsPage";
 
-export default async function MyPage() {  
-  const friends = await fetch('http://localhost:9200/friends', {
-    headers: {
-      'Authorization': `Bearer ${cookies().get('AccessToken')?.value}`,
-    },
+export default async function MyPage() {
+  const friends = await requestInstance<UserType[]>('/friends', {
     next: { tags: ['friends'] },
-  }).then(res => res.json());
+  });
 
   return (
-    <AllFriendsPage online={true} initFriends={friends} />
+    <AllFriendsPage online={true} initFriends={Array.isArray(friends) ? friends : []} />
   );
 }

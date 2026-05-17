@@ -1,15 +1,11 @@
-import { cookies } from "next/headers";
+import requestInstance from "@/api/requestInstance";
+import { UserType } from "@/types/User";
 import Search from "./components/Search/Search";
 import UsersList from "./components/UsersList/UsersList";
 import s from "./page.module.scss";
 
 export default async function Page() {
-    const users = await fetch('http://localhost:9200/user/getAll', {
-        credentials: 'include',
-        headers: {
-          'Authorization': `Bearer ${cookies().get('AccessToken')?.value}`,
-        },
-      }).then(res => res.json());
+    const users = await requestInstance<UserType[]>('/user/getAll');
 
     return(
       <div className={s.container}>
@@ -19,7 +15,7 @@ export default async function Page() {
 
         <Search />
 
-        <UsersList users={users} />
+        <UsersList users={Array.isArray(users) ? users : []} />
       </div>
     )
 }

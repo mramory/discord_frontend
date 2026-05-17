@@ -130,11 +130,11 @@ export default function ChannelsSidebar({ serverId }: ChannelsSidebarProps) {
             onClick={() => {
               toast("Copied", { position: "bottom-left" });
               navigator.clipboard.writeText(
-                process.env.NEXT_PUBLIC_BASE_URL + "/invite/" + data?.inviteCode
+                `${window.location.origin}/invite/${data?.inviteCode}`
               );
             }}
           >
-            {process.env.NEXT_PUBLIC_BASE_URL + "/invite/" + data?.inviteCode}
+            {`${typeof window !== "undefined" ? window.location.origin : ""}/invite/${data?.inviteCode}`}
           </span>
         </div>
 

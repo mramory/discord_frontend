@@ -1,20 +1,17 @@
-import { cookies } from "next/headers";
+import requestInstance from "@/api/requestInstance";
+import { FriendRequestType } from "@/types/Friend";
 import WaitingList from "./components/WaitingList/WaitingList";
 
 
 export default async function Page() {
-    const waiting = await fetch('http://localhost:9200/friends/req', {
-        credentials: 'include',
-        headers: {
-          'Authorization': `Bearer ${cookies().get('AccessToken')?.value}`,
-        },
-        next: { tags: ['friendsRequests'] },
-      }).then(res => res.json());
-    
+    const waiting = await requestInstance<FriendRequestType[]>('/friends/req', {
+      next: { tags: ['friendsRequests'] },
+    });
+
     return(
       <div>
         Waiting
-        <WaitingList initialData={waiting} />
+        <WaitingList initialData={Array.isArray(waiting) ? waiting : []} />
       </div>
     )
 }

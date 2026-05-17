@@ -1,4 +1,4 @@
-import { UseFormRegister, UseFormSetValue } from "react-hook-form"
+import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form"
 import Select from "@/components/Select/Select"
 import { IRegisterFormModel } from "../../RegisterForm/RegisterFormModel"
 import s from "./BirthDaySelect.module.scss"
@@ -14,9 +14,13 @@ const years = Array.from({ length: YEARS_RANGE }, (_, i) => CURRENT_YEAR - i).ma
 interface BirthDaySelectProps {
     register: UseFormRegister<IRegisterFormModel>,
     setValue: UseFormSetValue<IRegisterFormModel>,
+    errors?: FieldErrors<IRegisterFormModel>,
 }
 
-function BirthDaySelect({ register, setValue }: BirthDaySelectProps) {
+function BirthDaySelect({ register, setValue, errors }: BirthDaySelectProps) {
+    const errorMessage =
+        errors?.day?.message ?? errors?.month?.message ?? errors?.year?.message
+
     return(
       <div className={s.container}>
         <label>ДАТА РОЖДЕНИЯ<span> *</span></label>
@@ -28,6 +32,8 @@ function BirthDaySelect({ register, setValue }: BirthDaySelectProps) {
 
           <Select setValue={setValue} id="year" register={register} placeholder="Год" options={years} />
         </div>
+
+        {errorMessage && <div className={s.error}>{errorMessage}</div>}
       </div>
     )
 }
